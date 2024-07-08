@@ -1,5 +1,5 @@
 import { Stack, Box, Typography, Card, IconButton, Avatar, Button, } from '@mui/material';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Play } from 'phosphor-react';
 import {Link} from "react-router-dom";
 import carry from "../components/carry you.mp3";
@@ -7,6 +7,9 @@ import useSound from "use-sound";
 import { Category } from './Category';
 import { Pause } from '@mui/icons-material';
 import { getDataById } from "./storedata";
+import { auth, db } from "./firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 const General = () => {
   const [keys, setKeys]=useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -22,13 +25,57 @@ const General = () => {
       setKeys(1);
     }
   };
+  const [authUser, setAuthUser] = useState(null);
+    
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () => {
+      listen();
+    };
+  }, []);
+  const fetchUserData = async () => {
+    
+     auth.onAuthStateChanged(async (user) => {
+      if(user)
+      {
+      console.log(user);
+
+      const docRef = doc(db, "Users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setAuthUser(docSnap.data());
+        console.log(docSnap.data());
+      } else {
+        console.log("User is not logged in");
+      }
+    }
+    else{
+      console.log("User not logged in.");
+    }
+    });
+
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+
   return (
    
     <Stack  spacing={2} sx={{height:"81.4vh",position:"relative",width:"100%"}}>
       <Box p={1}><Category/></Box>
-     
-     <Stack direction={"row"} spacing={2}> <Avatar src='ss.jpg' alt='K' sx={{ width: 50, height: 50, backgroundColor: "orange" }} /><Stack><Typography fontFamily={"sans-serif"}>Hello Kaustav</Typography><Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>
-      
+      {authUser ? (
+     <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography>
+    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} spacing={2}> <Avatar src="ss.png" alt='K' sx={{ width: 50, height: 50, backgroundColor: "orange" }} /><Stack><Typography fontFamily={"sans-serif"}> Hello Kaustav </Typography>
+      <Typography fontSize={28} fontFamily={"sans-serif"} >Top 10 Latest</Typography></Stack></Stack>
+      )}
       <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
       
         <Box display={"flex"}  sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}  gap={2}>

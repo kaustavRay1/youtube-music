@@ -1,0 +1,71 @@
+/* Reset some default styles */
+
+
+/* Center the form on the page */
+.login-container {
+    padding-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style the form */
+.login-form {
+    background-color: #1a1a1a; /* Dark grey background for form */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 300px;
+}
+
+/* Style the form elements */
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.login-form input[type="email"],
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: none;
+    background-color: #333; /* Slightly lighter grey */
+    color: #fff;
+    border-radius: 5px;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green button */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+/* Style for the links */
+.login-form a {
+    color: #4CAF50;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}

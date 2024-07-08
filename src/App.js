@@ -8,7 +8,9 @@ import Explore from './components/Explore';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Library from './components/Library';
 import SmallPlayer from './components/SmallPlayer';
-
+import Login from "./components/login";
+import SignUp from "./components/register";
+import Profile from "./components/profile";
 
 const App = () => {
  
@@ -35,10 +37,13 @@ const App = () => {
     <Switch>
     
     <Route path="/home" ><General/></Route>
-   
     <Route path="/explore"><Explore/></Route>
     <Route path="/library"><Library/></Route>
+    <Route path="/login"><Login/></Route>
+    <Route path="/register"><SignUp /></Route>
+    <Route path="/profile"><Profile /></Route>
     <Redirect from="/" to="/home"/>
+   
         </Switch>
     </Box>
   </Stack>
