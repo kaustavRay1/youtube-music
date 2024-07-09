@@ -11,7 +11,6 @@ import SmallPlayer from './components/SmallPlayer';
 import Login from "./components/login";
 import SignUp from "./components/register";
 import Profile from "./components/profile";
-
 const App = () => {
  
   return (
@@ -27,12 +26,12 @@ const App = () => {
  </Stack>
  
     </Box>
-    <Stack direction={"row"} sx={{height:"72.6vh",width:"100%",backgroundColor:"black",padding:2, color:"white",}}>
+    <Stack direction={"row"} sx={{height:"100vh",width:"100%",backgroundColor:"black",padding:2, color:"white",}}>
     <Box sx={{ color:"#fff"}}>
     <Sidebar/>
 
     </Box>
-    <Box sx={{width:"100%",height:"76.2vh",color:"#fff",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
+    <Box sx={{width:"100%",height:"86vh",color:"#fff",}}>
    
     <Switch>
     
@@ -47,11 +46,6 @@ const App = () => {
         </Switch>
     </Box>
   </Stack>
-  <Box sx={{height:"13vh", width:"100%", backgroundColor:"black", color:"white",}}>
- 
- <SmallPlayer/>
- <Player/>
-  </Box>
   </Stack>
   </Box>
   </BrowserRouter>

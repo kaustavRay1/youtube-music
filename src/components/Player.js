@@ -4,11 +4,11 @@ import React, { useState,useEffect } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import id from "./General"
-export default function Player() {
+export default function Player({ data1 }) {
   const key=0;
   const data = getDataById(key);
   const [style, setStyle] = useState({ display: 'none'});
-  const duration = `${data.time}`; // seconds
+  const duration = `${getDataById(data1).time}`; // seconds
   const [position, setPosition] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
   function formatDuration(value) {
@@ -51,10 +51,10 @@ export default function Player() {
         </Stack>
       </Box>
       <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
-      <img src={data.img} alt='' height={"40"} width={"40"}></img>
+      <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
       <Stack>
-        <Typography>{data.name}</Typography>
-        <Typography variant='caption' >{data.artist}</Typography>
+        <Typography>{getDataById(data1).name}</Typography>
+        <Typography variant='caption' >{getDataById(data1).artist}</Typography>
       </Stack>
       <Box display={"flex"} gap={1} sx={{alignContent:"center",justifyContent:"center"}}>
       <IconButton sx={{ color: "white" }} ><ThumbsUp size={24} /></IconButton>
