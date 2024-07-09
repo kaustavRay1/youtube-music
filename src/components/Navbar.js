@@ -1,5 +1,5 @@
-import {  IconButton, Stack, Typography, InputBase, Avatar,Box, NativeSelect, Button } from '@mui/material'
-import { List, MagnifyingGlass, Screencast } from 'phosphor-react'
+import {  IconButton, Stack, Typography, InputBase, Avatar,Box } from '@mui/material'
+import { MagnifyingGlass, Screencast } from 'phosphor-react'
 import React, { useState, useEffect } from 'react'
 import { styled, } from "@mui/material/styles";
 import SwipeableTemporaryDrawer from './SwipeableTemporaryDrawer';
@@ -119,10 +119,8 @@ const Navbar = () => {
         </Box>
       )}
         </Stack>
-
-
-      </Stack>
-
+       </Stack>
+     
 
   )
 }

@@ -1,6 +1,6 @@
 import { Stack, Box, Typography, Card, IconButton, Avatar, Button, } from '@mui/material';
 import React, {useState, useEffect} from 'react';
-import { Play } from 'phosphor-react';
+import { Fire, Play } from 'phosphor-react';
 import {Link} from "react-router-dom";
 import carry from "../components/carry you.mp3";
 import useSound from "use-sound"; 
@@ -73,8 +73,8 @@ const General = () => {
       <Box p={1}><Category/></Box>
       {authUser ? (
      <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography>
-    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} spacing={2}> <Avatar src="ss.png" alt='K' sx={{ width: 50, height: 50, backgroundColor: "orange" }} /><Stack><Typography fontFamily={"sans-serif"}> Hello Kaustav </Typography>
-      <Typography fontSize={28} fontFamily={"sans-serif"} >Top 10 Latest</Typography></Stack></Stack>
+    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Typography fontSize={28} fontFamily={"sans-serif"} >Top Trending </Typography><Fire size={25} weight="bold"/></Stack>
       )}
       <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
       
