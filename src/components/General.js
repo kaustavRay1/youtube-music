@@ -23,7 +23,7 @@ const General = () => {
   const decrementId = () => {
     if(clicked == true){
       setCount(0);
-      setClicked(false)
+      setClicked(false);
     } 
     else if (count > 0  && dataToPass > count){
       setCount(count => count - 1);
@@ -35,18 +35,7 @@ const General = () => {
     }
   };
 
-
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { pause, duration, sound }] = useSound(0);
-  const playingButton = () => {
-    if (isPlaying) {
-      pause(); // this will pause the audio
-      setIsPlaying(false);
-    } else {
-      play(); 
-      setIsPlaying(true);
-    }
-  };
   const [authUser, setAuthUser] = useState(null);
     
   useEffect(() => {
@@ -91,7 +80,7 @@ const General = () => {
 
   return (
    <>
-    <Stack  spacing={2} sx={{height:"74vh",position:"relative",width:"100vw",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
+    <Stack  spacing={2} sx={{height:"74vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
       <Box p={1}><Category/></Box>
       {authUser ? (
      <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography>
@@ -100,10 +89,10 @@ const General = () => {
       )}
       <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
       
-        <Box display={"flex"}  sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}  gap={2}>
+        <Box display={"flex"}  sx={{overflowX:"scroll",width:"100%",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}  gap={2}>
       <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(1).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' name={getDataById(1).id} >{getDataById(1).name} •{getDataById(1).artist}</Typography>{!isPlaying ? (
 <IconButton onClick={e => {setDataToPass(1); setClicked(true);}} sx={{color:"white"}}><Play size={20} name={getDataById(1).id} /></IconButton>   ) : ( <IconButton onClick={(e)=>{setDataToPass(0)}}  sx={{color:"white"}}><Pause fontSize='small' /></IconButton> )}</Stack></Card></Box>
-<Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(2).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography onClick={playingButton} className='title' >{getDataById(2).name}</Typography>
+<Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(2).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(2).name}</Typography>
 <IconButton   sx={{color:"white"}} onClick={e => {setDataToPass(2); setClicked(true);}}><Play size={20} /></IconButton>  <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "22em",backgroundColor:"black"}}><img src={getDataById(3).img} alt='Carry you' height="81.5%" width="100%" /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography className='title' >{getDataById(3).name}</Typography>
 <IconButton   sx={{color:"white"}} onClick={e => {setDataToPass(3); setClicked(true);}}><Play size={20} /></IconButton>   <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(4).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(4).name} •{getDataById(4).artist}</Typography>
 <IconButton   sx={{color:"white"}}><Play size={20} onClick={e => {setDataToPass(4); setClicked(true);}}/></IconButton>   <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(5).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography className='title' >{getDataById(5).name} •{getDataById(5).artist}</Typography>
@@ -215,7 +204,7 @@ const General = () => {
    </Stack>
    <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
  
-   <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId}/>
+   <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} />
    <Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/>
     </Box>
     </>

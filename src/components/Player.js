@@ -3,7 +3,7 @@ import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutl
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
-export default function Player({ data1, incrementId, decrementId }) {
+export default function Player({ data1, incrementId, decrementId,}) {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const[timeRemaining, setTimeRemaining]= useState(0);

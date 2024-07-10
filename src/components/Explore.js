@@ -1,11 +1,37 @@
 import { Stack, Box, Typography, Card, IconButton, Button, } from '@mui/material';
-import React from 'react';
+import React, {useState} from 'react';
 import { MusicNote, ChartLineUp ,Smiley,ApplePodcastsLogo,Play } from 'phosphor-react';
 import {Link} from "react-router-dom";
+import SmallPlayer from './SmallPlayer';
+import Player from './Player';
 const Explore = () => {
+  const [dataToPass, setDataToPass] = useState(0);
+  const[count, setCount]=useState(0);
+  const[clicked, setClicked]= useState(false);
+  const incrementId = () => {
+    setDataToPass(prevId => prevId + 1);
+    setCount(count + 1);
+  };
+  const decrementId = () => {
+    if(clicked == true){
+      setCount(0);
+      setClicked(false)
+    } 
+    else if (count > 0  && dataToPass > count){
+      setCount(count => count - 1);
+      setDataToPass(prevId => prevId -1);
+    }
+    else if (count == dataToPass && count > 0){
+      setCount(count => count - 1);
+      setDataToPass(prevId => prevId -1);
+    }
+  };
+
+
   return (
-    <Stack spacing={4} justifyContent={"center"}  p={3} sx={{position:"relative",}}>
-  <Stack direction={'row'} alignItems={"center"} spacing={3} sx={{overflow:"auto",overflowY:"hidden"}}> 
+    <>
+    <Box gap={2} sx={{height:"74vh",position:"relative",width:"90%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
+  <Stack direction={'row'} alignItems={"center"} spacing={3} sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}> 
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"18em",height:"4em",}}><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={12}><MusicNote size={32} /><Typography fontSize={20}>New releases</Typography></Stack></Card>
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"17em",height:"4em",}} variant='outlined'><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={14}> <ChartLineUp  size={32} /> <Typography fontSize={20}>Charts</Typography></Stack></Card>
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"20em",height:"4em",}} variant='outlined'><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={12}><Smiley size={32} /> <Typography fontSize={19}>Mood and genres</Typography></Stack></Card>
@@ -103,7 +129,13 @@ const Explore = () => {
   <Card sx={{borderRadius:"4",backgroundColor:"rgb(201, 44, 78)", minWidth:"10em",height:"3em",paddingLeft:1,}}><Card sx={{height:"100%",width:"100%",borderRadius:"0%", backgroundColor:"#212121",justifyContent:"center",alignContent:"center",paddingLeft:1.5,color:"white"}} ><Typography fontSize={14} fontFamily={"sans-serif"}>Indie</Typography></Card></Card>
   </Stack>
   </Stack>
-  </Stack>
+  </Box>
+  <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
+ 
+  <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId}/>
+  <Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/>
+   </Box>
+   </>
   )
 }
 
