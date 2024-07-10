@@ -1,23 +1,55 @@
 import { Stack, Typography, IconButton, Box } from '@mui/material'
 import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp } from 'phosphor-react'
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
-import id from "./General"
-export default function Player({ data1 }) {
-  const key=0;
-  const data = getDataById(key);
+export default function Player({ data1, incrementId, decrementId }) {
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const[timeRemaining, setTimeRemaining]= useState(0);
+  const myRef = useRef();
+
+  const start = () => {
+    myRef.current.play();
+      setIsPlaying(true);
+  }
+  const pauseAudio = () => {
+    console.log("here");
+    myRef.current.pause();
+    setIsPlaying(false);
+  }
   const [style, setStyle] = useState({ display: 'none'});
-  const duration = `${getDataById(data1).time}`; // seconds
-  const [position, setPosition] = React.useState(0);
-  const [paused, setPaused] = React.useState(false);
+  
+  const [position, setPosition] = useState(0);
+  
   function formatDuration(value) {
+    if(value && !isNaN(value))
+    {
+      
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
+    }
+    else{
+      return '00:00';
+    }
   }
   const [isDisabled, setIsDisabled] = useState(false);
-
+  const [volume, setVolume]=useState(30);
+  useEffect(() => {
+    if(myRef){
+    myRef.current.volume= volume/100;
+    }
+    if(isPlaying){
+      setInterval(() => {
+        const _duration =Math.floor(myRef?.current?.duration); // seconds
+        setTimeRemaining(_duration);
+        const _elapsed =Math.floor(myRef?.current?.currentTime);
+        setPosition(_elapsed);
+      }, 100);
+    }
+  }, [volume, isPlaying])
+  
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
@@ -35,19 +67,21 @@ export default function Player({ data1 }) {
     return null;
   } 
   return (
+    <>
+    <audio ref={myRef} src={getDataById(data1).music} />
     <Stack direction={"column"}>
     <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
     min={0}
     step={1}
-    max={duration}
-    onChange={(_, value) => setPosition(value)} />
+    max={timeRemaining}
+    onClick={(e,f) =>setPosition(f)} />
 <Stack direction={"row"} sx={{paddingLeft:2, alignContent:"center", justifyContent:"space-between", minWidth:"18em" }} spacing={1}>
     <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>
-          <IconButton sx={{ color: "white" }} ><SkipBack weight='fill' size={24} /></IconButton>
-          <IconButton sx={{ color: "white" }}  > <Play size={30} weight="fill" /></IconButton>
-          <IconButton sx={{ color: "white" }}><SkipForward size={24} weight="fill" /></IconButton>
-          <Typography variant='caption' sx={{ color: "white" }}>{formatDuration(position)}/-{formatDuration(duration - position)}</Typography>
+          <IconButton sx={{ color: "white" }} onClick={decrementId} ><SkipBack weight='fill' size={24} /></IconButton>
+         {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
+          <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
+          <Typography variant='caption' sx={{ color: "white" }}>{formatDuration(`${position}`)}/-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
         </Stack>
       </Box>
       <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
@@ -71,7 +105,10 @@ export default function Player({ data1 }) {
                 }}><Slider
               sx={style}
               orientation="horizontal"
-              defaultValue={30}
+              min={0}
+              max={100}
+              value={volume}
+              onChange={(e,v) =>setVolume(v)}
               aria-label="Temperature"
               valueLabelDisplay="auto"
             /></Box></Stack>
@@ -81,6 +118,6 @@ export default function Player({ data1 }) {
       </Box>
       </Stack>
       </Stack>
-
+      </>
   )
 }

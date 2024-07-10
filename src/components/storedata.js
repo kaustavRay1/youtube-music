@@ -15,6 +15,7 @@ const data = [
       title: "Carry You",
       artist: "Martin Garrix",
       time: 217,
+      music: './carry you.mp3',
   },
   {
       id: 2,
@@ -22,6 +23,7 @@ const data = [
       title: "If We'll Ever be Rem..",
       artist: "Martin Garrix",
       time: 219,
+      music: "./carry you.mp3"
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const data = [
     title: "Martin Garrix Live @ Ultra Music Festival Miami 2023",
     artist: "Martin Garrix",
     time: 219,
+    music: "./carry you.mp3"
 },
 {
   id: 4,
@@ -36,6 +39,7 @@ const data = [
   title: "Starlight",
   artist: "Martin Garrix",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 5,
@@ -43,6 +47,7 @@ const data = [
   title: "Limitless",
   artist: "Martin Garrix",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 6,
@@ -50,6 +55,7 @@ const data = [
   title: "Ocean",
   artist: "Martin Garrix",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 7,
@@ -57,6 +63,7 @@ const data = [
   title: "Follow",
   artist: "Martin Garrix",
   time: 219,
+  music: "./carry you.mp3"
 },
 //Listen again ends
 //Quick picks
@@ -67,6 +74,7 @@ const data = [
   title: "No Lie (feat. Dua Lipa)",
   artist: "Sean Paul • Dua Lipa",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 9,
@@ -74,6 +82,7 @@ const data = [
   title: "When We're Gone",
   artist: "Mesto & Justin Mylo",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 10,
@@ -81,6 +90,7 @@ const data = [
   title: "Cry",
   artist: "Cigarettes after sex",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 11,
@@ -88,6 +98,7 @@ const data = [
   title: "Cry",
   artist: "Cigarettes after sex",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 12,
@@ -95,6 +106,7 @@ const data = [
   title: "Cry",
   artist: "Cigarettes after sex",
   time: 219,
+  music: "./carry you.mp3"
 },
 {
   id: 13,
@@ -102,6 +114,7 @@ const data = [
   title: "Cry",
   artist: "Cigarettes after sex",
   time: 219,
+  music: "./carry you.mp3"
 },
 ];
 
@@ -114,6 +127,7 @@ export function getDataById(id) {
       name: item.title,
       artist: item.artist,
       time: item.time,
+      music: item.music,
   } : null; 
 }
 
@@ -124,5 +138,6 @@ export function getData() {
     name: data.title,
     artist: data.artist,
     time: data.time,
+    music: data.music,
   };
 }
