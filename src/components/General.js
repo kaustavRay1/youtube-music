@@ -1,4 +1,4 @@
-import { Stack, Box, Typography, Card, IconButton, Avatar, Button, } from '@mui/material';
+import { Stack, Box, Typography, Card, IconButton, Avatar, } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { Fire, Play } from 'phosphor-react';
 import useSound from "use-sound"; 
