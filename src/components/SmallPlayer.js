@@ -60,7 +60,7 @@ const SmallPlayer = ({ data1 }) => {
   }
   return (
     <>
-     <audio ref={myRef} src={getDataById(data1).music} />
+     <audio ref={myRef} src={getDataById(data1).music} autoPlay={true} />
     <Stack direction={"column"}>
         <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
         min={0}

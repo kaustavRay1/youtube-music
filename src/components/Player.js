@@ -3,9 +3,9 @@ import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutl
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
-export default function Player({ data1, incrementId, decrementId,}) {
+export default function Player({ data1, incrementId, decrementId}) {
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const[timeRemaining, setTimeRemaining]= useState(0);
   const myRef = useRef();
 
@@ -68,7 +68,7 @@ export default function Player({ data1, incrementId, decrementId,}) {
   } 
   return (
     <>
-    <audio ref={myRef} src={getDataById(data1).music} />
+    <audio ref={myRef} src={getDataById(data1).music} autoPlay={true} />
     <Stack direction={"column"}>
     <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
     min={0}

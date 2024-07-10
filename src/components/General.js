@@ -12,10 +12,11 @@ import SmallPlayer from './SmallPlayer';
 import Player from './Player';
 
 const General = () => {
- 
+  
   const [dataToPass, setDataToPass] = useState(0);
   const[count, setCount]=useState(0);
   const[clicked, setClicked]= useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const incrementId = () => {
     setDataToPass(prevId => prevId + 1);
     setCount(count + 1);
@@ -35,7 +36,9 @@ const General = () => {
     }
   };
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  
+  
+
   const [authUser, setAuthUser] = useState(null);
     
   useEffect(() => {
