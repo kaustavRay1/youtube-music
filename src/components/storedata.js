@@ -14,7 +14,6 @@ const data = [
       img: 'carry you.jpeg',
       title: "Carry You",
       artist: "Martin Garrix",
-      time: 217,
       music: './carry you.mp3',
   },
   {
@@ -22,7 +21,6 @@ const data = [
       img: 'martin 1.jpeg',
       title: "If We'll Ever be Rem..",
       artist: "Martin Garrix",
-      time: 219,
       music: "./carry you.mp3"
   },
   {
@@ -30,7 +28,6 @@ const data = [
     img: 'martin 7.jpeg',
     title: "Martin Garrix Live @ Ultra Music Festival Miami 2023",
     artist: "Martin Garrix",
-    time: 219,
     music: "./carry you.mp3"
 },
 {
@@ -38,7 +35,6 @@ const data = [
   img: 'martin 2.jpeg',
   title: "Starlight",
   artist: "Martin Garrix",
-  time: 219,
   music: "./carry you.mp3"
 },
 {
@@ -46,7 +42,6 @@ const data = [
   img: 'martin 3.jpeg',
   title: "Limitless",
   artist: "Martin Garrix",
-  time: 219,
   music: "./carry you.mp3"
 },
 {
@@ -54,7 +49,6 @@ const data = [
   img: 'martin 4.jpeg',
   title: "Ocean",
   artist: "Martin Garrix",
-  time: 219,
   music: "./carry you.mp3"
 },
 {
@@ -62,7 +56,6 @@ const data = [
   img: 'martin 5.jpeg',
   title: "Follow",
   artist: "Martin Garrix",
-  time: 219,
   music: "./carry you.mp3"
 },
 //Listen again ends
@@ -73,7 +66,6 @@ const data = [
   img: 'q1.jpeg',
   title: "No Lie (feat. Dua Lipa)",
   artist: "Sean Paul • Dua Lipa",
-  time: 219,
   music: "./carry you.mp3"
 },
 {
@@ -81,39 +73,69 @@ const data = [
   img: 'q2.jpeg',
   title: "When We're Gone",
   artist: "Mesto & Justin Mylo",
-  time: 219,
   music: "./carry you.mp3"
 },
 {
   id: 10,
-  img: 'cry.jpeg',
-  title: "Cry",
-  artist: "Cigarettes after sex",
-  time: 219,
+  img: 'q4.jpeg',
+  title: "Apologize",
+  artist: "One Republic • Timbaland",
   music: "./carry you.mp3"
 },
 {
   id: 11,
-  img: 'cry.jpeg',
-  title: "Cry",
-  artist: "Cigarettes after sex",
-  time: 219,
+  img: 'q5.jpeg',
+  title: "Circles",
+  artist: "Post Malone • Hollywood's Bleeding",
   music: "./carry you.mp3"
 },
 {
   id: 12,
-  img: 'cry.jpeg',
-  title: "Cry",
-  artist: "Cigarettes after sex",
-  time: 219,
+  img: 'q6.jpeg',
+  title: "I Feel It Coming (feat. Daft Punk)",
+  artist: "Song • The Weeknd",
   music: "./carry you.mp3"
 },
 {
   id: 13,
-  img: 'cry.jpeg',
-  title: "Cry",
-  artist: "Cigarettes after sex",
-  time: 219,
+  img: 'q7.jpeg',
+  title: "Breakaway",
+  artist: "Single • Martin Garrix, Mesto & WILHELM",
+  music: "./carry you.mp3"
+},
+{
+  id: 14,
+  img: 'q8.jpeg',
+  title: "Nevada (feat. Cozi Zuehlsdorff)",
+  artist: "Song • Vicetone",
+  music: "./carry you.mp3"
+},
+{
+  id: 15,
+  img: 'q9.jpeg',
+  title: "Waiting For Love",
+  artist: "Avicii • Stories",
+  music: "./carry you.mp3"
+},
+{
+  id: 16,
+  img: 'q10.jpeg',
+  title: "Hymn for the Weekend",
+  artist: "Coldplay • A Head Full of Dreams",
+  music: "./carry you.mp3"
+},
+{
+  id: 17,
+  img: 'q11.jpeg',
+  title: "Stereo Hearts (feat. Adam Levine)",
+  artist: "Gym Class Heroes • The Papercut Chronicles II",
+  music: "./carry you.mp3"
+},
+{
+  id: 18,
+  img: 'q12.jpeg',
+  title: "We Are Young (feat. Janelle Monáe)",
+  artist: "Fun",
   music: "./carry you.mp3"
 },
 ];
