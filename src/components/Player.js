@@ -3,11 +3,16 @@ import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutl
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
-export default function Player({ data1, incrementId, decrementId}) {
+export default function Player({ data1, incrementId, decrementId, onChange}) {
 
   const [isPlaying, setIsPlaying] = useState(true);
   const[timeRemaining, setTimeRemaining]= useState(0);
+   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
   const myRef = useRef();
+ const handleSongEnd = () => {
+    setCurrentSongIndex(currentSongIndex => currentSongIndex + 1);
+  };
 
   const start = () => {
     myRef.current.play();
@@ -34,6 +39,11 @@ export default function Player({ data1, incrementId, decrementId}) {
       return '00:00';
     }
   }
+  const [play1, setPlay1]=useState(1);
+  const playNext = () => {
+  setPlay1(play1 + 1);
+  onChange(play1);
+  };
   const [isDisabled, setIsDisabled] = useState(false);
   const [volume, setVolume]=useState(30);
   useEffect(() => {
@@ -68,13 +78,13 @@ export default function Player({ data1, incrementId, decrementId}) {
   } 
   return (
     <>
-    <audio ref={myRef} src={getDataById(data1).music} autoPlay={true} />
+    <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}} onEnded={playNext}/>
     <Stack direction={"column"}>
     <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
     min={0}
     step={1}
     max={timeRemaining}
-    onClick={(e,f) =>setPosition(f)} />
+    onDrag={(e,f) =>setPosition(f)} />
 <Stack direction={"row"} sx={{paddingLeft:2, alignContent:"center", justifyContent:"space-between", minWidth:"18em" }} spacing={1}>
     <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>

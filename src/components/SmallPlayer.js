@@ -3,7 +3,7 @@ import React, {useState,useEffect, useRef} from 'react'
 import {Play,Screencast, Pause} from "phosphor-react"
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
-const SmallPlayer = ({ data1 }) => {
+const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const[timeRemaining, setTimeRemaining]= useState(0);
   const myRef = useRef();
@@ -17,6 +17,11 @@ const SmallPlayer = ({ data1 }) => {
     myRef.current.pause();
     setIsPlaying(false);
   }
+  const [play1, setPlay1]=useState(1);
+  const playNext = () => {
+  setPlay1(play1 + 1);
+  onChange(play1);
+  };
   const [position, setPosition] = useState(0);
   function formatDuration(value) {
     if(value && !isNaN(value))
@@ -60,7 +65,7 @@ const SmallPlayer = ({ data1 }) => {
   }
   return (
     <>
-     <audio ref={myRef} src={getDataById(data1).music} autoPlay={true} />
+     <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}}  onEnded={playNext}/>
     <Stack direction={"column"}>
         <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
         min={0}

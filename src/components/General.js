@@ -17,6 +17,9 @@ const General = () => {
   const[count, setCount]=useState(0);
   const[clicked, setClicked]= useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const handleChange = (play1) => {
+    setDataToPass(dataToPass + play1);
+  };
   const incrementId = () => {
     setDataToPass(prevId => prevId + 1);
     setCount(count + 1);
@@ -207,8 +210,8 @@ const General = () => {
    </Stack>
    <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
  
-   <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} />
-   <Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/>
+   <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} />
+   <Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/>
     </Box>
     </>
   )

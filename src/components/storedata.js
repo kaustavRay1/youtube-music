@@ -19,9 +19,9 @@ const data = [
   {
       id: 2,
       img: 'martin 1.jpeg',
-      title: "If We'll Ever be Rem..",
+      title: "If We'll Ever Be Rem..",
       artist: "Martin Garrix",
-      music: "./carry you.mp3"
+      music: "./If We'll Ever Be Remembered.mp3"
   },
   {
     id: 3,
@@ -56,7 +56,7 @@ const data = [
   img: 'martin 5.jpeg',
   title: "Follow",
   artist: "Martin Garrix",
-  music: "./carry you.mp3"
+  music: "./Martin Garrix & Zedd - Follow.mp3"
 },
 //Listen again ends
 //Quick picks
