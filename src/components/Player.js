@@ -1,5 +1,6 @@
 import { Stack, Typography, IconButton, Box } from '@mui/material'
-import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp } from 'phosphor-react'
+import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, } from 'phosphor-react'
+import Sidebar from './Sidebar';
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
@@ -7,12 +8,9 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
 
   const [isPlaying, setIsPlaying] = useState(true);
   const[timeRemaining, setTimeRemaining]= useState(0);
-   const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
   const myRef = useRef();
- const handleSongEnd = () => {
-    setCurrentSongIndex(currentSongIndex => currentSongIndex + 1);
-  };
+ 
 
   const start = () => {
     myRef.current.play();
@@ -44,7 +42,14 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
   setPlay1(play1 + 1);
   onChange(play1);
   };
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const handleSliderChange = (e) => {
+    const newTime = e.target.value;
+    myRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+
   const [volume, setVolume]=useState(30);
   useEffect(() => {
     if(myRef){
@@ -59,11 +64,11 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
       }, 100);
     }
   }, [volume, isPlaying])
-  
+  const [isDisabled, setIsDisabled] = useState(false);
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      setIsDisabled(screenWidth < 805);
+      setIsDisabled(screenWidth < 1000);
     };
 
     window.addEventListener('resize', handleResize);
@@ -75,7 +80,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
 
   if (isDisabled) {
     return null;
-  } 
+  }
   return (
     <>
     <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}} onEnded={playNext}/>
@@ -84,7 +89,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
     min={0}
     step={1}
     max={timeRemaining}
-    onDrag={(e,f) =>setPosition(f)} />
+    onChange={handleSliderChange} />
 <Stack direction={"row"} sx={{paddingLeft:2, alignContent:"center", justifyContent:"space-between", minWidth:"18em" }} spacing={1}>
     <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>
@@ -106,8 +111,8 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <IconButton sx={{ color: "white" }}><DotsThreeOutlineVertical size={24} /></IconButton>
       </Box>
       </Box>
-      <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center", minWidth:"15em"}}>
-      <Stack direction={"row"}  spacing={1}> <SpeakerHigh size={24}  onPointerEnter={e => {
+      <Box display={"flex"} gap={2} sx={{alignItems:"center", minWidth:"15em"}}>
+      <Stack direction={"row"}  spacing={1} sx={{alignItems:"center"}}> <SpeakerHigh size={24}  onPointerEnter={e => {
                      setStyle({display: 'block',width:50,color:"red"});
                  }}
                   /><Box  style={style}  onPointerLeave={e => {

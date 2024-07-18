@@ -30,7 +30,7 @@ const Explore = () => {
 
   return (
     <>
-    <Box gap={2} sx={{height:"74vh",position:"relative",width:"90%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
+    <Box gap={2} className="general" sx={{height:"74vh",position:"relative",width:"100%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
   <Stack direction={'row'} alignItems={"center"} spacing={3} sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}> 
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"18em",height:"4em",}}><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={12}><MusicNote size={32} /><Typography fontSize={20}>New releases</Typography></Stack></Card>
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"17em",height:"4em",}} variant='outlined'><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={14}> <ChartLineUp  size={32} /> <Typography fontSize={20}>Charts</Typography></Stack></Card>
@@ -132,8 +132,8 @@ const Explore = () => {
   </Box>
   <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
  
-  <SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId}/>
-  <Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/>
+  <Box className="small-player"><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId}/></Box>
+  <Box className="player"><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/></Box>
    </Box>
    </>
   )

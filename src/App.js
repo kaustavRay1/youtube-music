@@ -7,10 +7,11 @@ import Player from './components/Player';
 import Explore from './components/Explore';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Library from './components/Library';
-import SmallPlayer from './components/SmallPlayer';
+import SmallNavbar from './components/SmallNavbar';
 import Login from "./components/login";
 import SignUp from "./components/register";
 import Profile from "./components/profile";
+import "./App.css";
 const App = () => {
  
   return (
@@ -19,15 +20,17 @@ const App = () => {
     
     <Box sx={{overflowX:"hidden", overflowY:"hidden",height:"100vh",width:"100vw"}}>
     <Stack sx={{overflowX:"hidden", overflowY:"hidden"}}>
-    <Box sx={{height:40,width:"100%",backgroundColor:"black", color:"#fff",padding:2,}}>
+    <Box sx={{height:40,width:"100%",backgroundColor:"black", color:"#fff",padding:2,}}  >
       <Stack justifyItems={"center"} >
- <Navbar />
- 
+        <Box className="navbar">
+         <Navbar/></Box>
+         <Box className="small-navbar"><SmallNavbar/></Box>
+         
  </Stack>
  
     </Box>
     <Stack direction={"row"} sx={{height:"100vh",width:"100%",backgroundColor:"black",padding:2, color:"white",}}>
-    <Box sx={{ color:"#fff"}}>
+    <Box  className="sidebar" sx={{color:"#fff"}}>
     <Sidebar/>
 
     </Box>

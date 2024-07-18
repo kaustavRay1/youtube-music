@@ -1,0 +1,34 @@
+import React, {useState, useEffect} from 'react'
+import{House,Compass,} from 'phosphor-react'
+import { Stack, Typography,IconButton, Box} from '@mui/material'
+import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
+import { Link } from "react-router-dom";
+const BottomBar = () => {
+  return (
+    <>
+  <Box display={"flex"} gap={2} alignContent={"center"} justifyContent={"space-evenly"}>
+      <Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>
+      <Link to="/home">
+    <IconButton sx={{color:'white'}} ><Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>
+   <House size={20} /><Typography>Home</Typography>
+    
+    </Stack></IconButton></Link></Stack>
+    <Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>
+    <Link to="/explore">
+    <IconButton sx={{color:'white'}} ><Stack direction={"column"} sx={{alignItems:"center"}} spacing={1} >
+    <Compass size={20} />
+    <Typography>Explore</Typography>
+    </Stack></IconButton></Link></Stack>
+    <Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>
+    <Link to="/library">
+    <IconButton sx={{color:'white'}} ><Stack direction={"column"} sx={{alignItems:"center"}} spacing={1}>
+    <LibraryMusicOutlinedIcon fontSize='small' />
+    <Typography>Library</Typography>
+    </Stack></IconButton></Link></Stack>
+    </Box>
+
+    </>
+  )
+}
+
+export default BottomBar

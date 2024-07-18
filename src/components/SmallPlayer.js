@@ -1,10 +1,11 @@
-import { Stack,IconButton,Typography, Box } from '@mui/material';
+import { Stack,IconButton,Typography, Box, Divider } from '@mui/material';
 import React, {useState,useEffect, useRef} from 'react'
 import {Play,Screencast, Pause} from "phosphor-react"
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
+import BottomBar from './BottomBar';
 const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const[timeRemaining, setTimeRemaining]= useState(0);
   const myRef = useRef();
 
@@ -21,6 +22,12 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
   const playNext = () => {
   setPlay1(play1 + 1);
   onChange(play1);
+  };
+  const [currentTime, setCurrentTime] = useState(0);
+  const handleSliderChange = (e) => {
+    const newTime = e.target.value;
+    myRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
   };
   const [position, setPosition] = useState(0);
   function formatDuration(value) {
@@ -45,12 +52,12 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
       }, 100);
     }
   }, [isPlaying])
-    const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      setIsDisabled(screenWidth > 805);
+      setIsDisabled(screenWidth > 1000);
     };
 
     window.addEventListener('resize', handleResize);
@@ -63,6 +70,8 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
   if (isDisabled) {
     return null;
   }
+
+
   return (
     <>
      <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}}  onEnded={playNext}/>
@@ -71,7 +80,7 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
         min={0}
         step={1}
         max={timeRemaining}
-        onChange={(_, value) => setPosition(value)} />
+        onChange={handleSliderChange} />
     <Stack direction={"row"} sx={{paddingLeft:2, alignContent:"center", justifyContent:"space-between", minWidth:"18em" }} spacing={1}>
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
@@ -87,6 +96,10 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
           {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
           </Stack>
           </Stack>
+          <Box paddingTop={1}>
+          <Divider color="white"/>
+          <Box paddingTop={1}><BottomBar/></Box>
+          </Box>
           </Stack>
           </>
   )

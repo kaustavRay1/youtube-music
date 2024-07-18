@@ -5,23 +5,6 @@ import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import { Link } from "react-router-dom";
 const Sidebar = () => {
   const [isDisabled, setIsDisabled] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      setIsDisabled(screenWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  if (isDisabled) {
-    return null;
-  } 
   return (
     <Stack spacing={3} alignContent={"center"} justifyContent={"center"}>
       <Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>

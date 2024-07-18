@@ -66,7 +66,7 @@ const data = [
   img: 'q1.jpeg',
   title: "No Lie (feat. Dua Lipa)",
   artist: "Sean Paul • Dua Lipa",
-  music: "./carry you.mp3"
+  music: "./No Lie.mp3"
 },
 {
   id: 9,
