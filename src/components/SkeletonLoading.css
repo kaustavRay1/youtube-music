@@ -1,0 +1,64 @@
+/* src/LoadingCard.css */
+@media screen and ( min-width : 1000px) {
+  .skeleton-body{
+    padding-left: 2%;
+  }
+  
+}
+.loading-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 14em;
+    max-width: 22em;
+    margin: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: black;
+  }
+  
+  .loading-thumbnail {
+    width: 100%;
+    min-height: 12em;
+    max-height: 18em;
+    background: #e0e0e0;
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  .loading-details {
+    padding: 16px;
+  }
+  
+  .loading-title,
+  .loading-channel {
+    height: 20px;
+    background: #e0e0e0;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 4px;
+  }
+  
+  .loading-title {
+    width: 80%;
+    margin-bottom: 12px;
+  }
+  
+  .loading-channel {
+    width: 50%;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  
+  .loading-card .loading-thumbnail,
+  .loading-card .loading-title,
+  .loading-card .loading-channel {
+    background: linear-gradient(90deg, #1e1a1a 25%, #2a2525 50%, #6e6767 75%);
+    background-size: 200% 100%;
+  }
+  

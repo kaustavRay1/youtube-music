@@ -85,7 +85,7 @@ const SmallPlayer = ({ data1, incrementId, decrementId, onChange }) => {
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
           <Stack>
-            <Typography>{getDataById(data1).name}</Typography>
+            <Typography variant='caption2'>{getDataById(data1).name}</Typography>
             <Typography variant='caption' >{getDataById(data1).artist}</Typography>
           </Stack>
           

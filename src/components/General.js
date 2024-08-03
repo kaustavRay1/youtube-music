@@ -9,6 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import SmallPlayer from './SmallPlayer';
 import Player from './Player';
+import Explore from './Explore';
 const General = () => {
   
   const [dataToPass, setDataToPass] = useState(0);
@@ -209,7 +210,7 @@ const General = () => {
  
    <Box ><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} /></Box>
    <Box className="player"><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
-  
+   <Box display={"none"}><Explore data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
     </Box>
     
     </>

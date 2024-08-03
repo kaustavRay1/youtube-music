@@ -44,3 +44,36 @@ body{
     max-height: 65vh;
   }
 }
+.loader-container{
+  height: 100dvh;
+  width: 100dvw;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+.loader{
+  height: 10em;
+  width: 10em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.music{
+  font-size: 8em;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+@media screen  and (max-width : 600px) {
+  .loader{
+  height: 6em;
+  width: 6em;
+ 
+  }
+  .music{
+  display: none;
+  }
+}

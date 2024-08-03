@@ -1,19 +1,32 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, lazy, Suspense} from 'react'
 import Navbar from './components/Navbar';
 import { Box,  Stack } from '@mui/material';
 import Sidebar from './components/Sidebar';
-import General from './components/General';
 import Player from './components/Player';
-import Explore from './components/Explore';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Library from './components/Library';
 import SmallNavbar from './components/SmallNavbar';
 import Login from "./components/login";
 import SignUp from "./components/register";
 import Profile from "./components/profile";
+import Loading from './components/Loading';
+import SkeletonLoader from './components/SkeletonLoader';
 import "./App.css";
+const General = lazy(()=> import('./components/General'));
+const Explore = lazy(()=> import('./components/Explore'));
 const App = () => {
- 
+  const [isLoading, setIsLoading] = useState(true);
+    
+      useEffect(() => {
+        // Simulate an API call
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      }, []);
+    
+      if (isLoading) {
+        return <Loading />;
+      }
   return (
    
     <BrowserRouter>
@@ -36,17 +49,22 @@ const App = () => {
     </Box>
     <Box sx={{width:"100%",height:"86vh",color:"#fff",}}>
    
-    <Switch>
     
+    <Suspense fallback={<div><SkeletonLoader/></div>}>
+    <Switch>
     <Route path="/home" ><General/></Route>
-    <Route path="/explore"><Explore/></Route>
+    <Route path="/explore"><Explore /></Route>
     <Route path="/library"><Library/></Route>
-    <Route path="/login"><Login/></Route>
+    <Route path="/login" ><Login/></Route>
     <Route path="/register"><SignUp /></Route>
     <Route path="/profile"><Profile /></Route>
     <Redirect from="/" to="/home"/>
+    </Switch>
+    </Suspense>
+    
+    
    
-        </Switch>
+        
     </Box>
   </Stack>
   </Stack>
