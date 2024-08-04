@@ -11,7 +11,7 @@ const data = [
     //(General.js)
     //Listen again
       id: 1,
-      img: 'carry you.jpeg',
+      img: './youtube-music/carry you.jpeg',
       title: "Carry You",
       artist: "Martin Garrix",
       music: './carry you.mp3',
