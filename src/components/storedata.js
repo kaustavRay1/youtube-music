@@ -28,7 +28,7 @@ const data = [
     img: './youtube-music/martin 7.jpeg',
     title: "Martin Garrix Live @ Ultra Music Festival Miami 2023",
     artist: "Martin Garrix",
-    music: "./carry you.mp3"
+    music: "./youtube-music/carry you.mp3"
 },
 {
   id: 4,
@@ -39,104 +39,104 @@ const data = [
 },
 {
   id: 5,
-  img: 'martin 3.jpeg',
+  img: './youtube-music/martin 3.jpeg',
   title: "Limitless",
   artist: "Martin Garrix",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 6,
-  img: 'martin 4.jpeg',
+  img: './youtube-music/martin 4.jpeg',
   title: "Ocean",
   artist: "Martin Garrix",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 7,
-  img: 'martin 5.jpeg',
+  img: './youtube-music/martin 5.jpeg',
   title: "Follow",
   artist: "Martin Garrix",
-  music: "./Martin Garrix & Zedd - Follow.mp3"
+  music: "./youtube-music/Martin Garrix & Zedd - Follow.mp3"
 },
 //Listen again ends
 //Quick picks
 //col 1 
 {
   id: 8,
-  img: 'q1.jpeg',
+  img: './youtube-music/q1.jpeg',
   title: "No Lie (feat. Dua Lipa)",
   artist: "Sean Paul • Dua Lipa",
-  music: "./No Lie.mp3"
+  music: "./youtube-music/No Lie.mp3"
 },
 {
   id: 9,
-  img: 'q2.jpeg',
+  img: './youtube-music/q2.jpeg',
   title: "When We're Gone",
   artist: "Mesto & Justin Mylo",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 10,
   img: 'q4.jpeg',
   title: "Apologize",
   artist: "One Republic • Timbaland",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 11,
-  img: 'q5.jpeg',
+  img: './youtube-music/q5.jpeg',
   title: "Circles",
   artist: "Post Malone • Hollywood's Bleeding",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 12,
-  img: 'q6.jpeg',
+  img: './youtube-music/q6.jpeg',
   title: "I Feel It Coming (feat. Daft Punk)",
   artist: "Song • The Weeknd",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 13,
-  img: 'q7.jpeg',
+  img: './youtube-music/q7.jpeg',
   title: "Breakaway",
   artist: "Single • Martin Garrix, Mesto & WILHELM",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 14,
-  img: 'q8.jpeg',
+  img: './youtube-music/q8.jpeg',
   title: "Nevada (feat. Cozi Zuehlsdorff)",
   artist: "Song • Vicetone",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 15,
-  img: 'q9.jpeg',
+  img: './youtube-music/q9.jpeg',
   title: "Waiting For Love",
   artist: "Avicii • Stories",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 16,
-  img: 'q10.jpeg',
+  img: './youtube-music/q10.jpeg',
   title: "Hymn for the Weekend",
   artist: "Coldplay • A Head Full of Dreams",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 17,
-  img: 'q11.jpeg',
+  img: './youtube-music/q11.jpeg',
   title: "Stereo Hearts (feat. Adam Levine)",
   artist: "Gym Class Heroes • The Papercut Chronicles II",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 18,
-  img: 'q12.jpeg',
+  img: './youtube-music/q12.jpeg',
   title: "We Are Young (feat. Janelle Monáe)",
   artist: "Fun",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 ];
 
