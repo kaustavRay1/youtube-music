@@ -14,7 +14,7 @@ const data = [
       img: './youtube-music/carry you.jpeg',
       title: "Carry You",
       artist: "Martin Garrix",
-      music: './carry you.mp3',
+      music: './youtube-music/carry you.mp3',
   },
   {
       id: 2,
