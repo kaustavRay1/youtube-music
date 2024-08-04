@@ -18,24 +18,24 @@ const data = [
   },
   {
       id: 2,
-      img: 'martin 1.jpeg',
+      img: './youtube-music/martin 1.jpeg',
       title: "If We'll Ever Be Rem..",
       artist: "Martin Garrix",
-      music: "./If We'll Ever Be Remembered.mp3"
+      music: "./youtube-music/If We'll Ever Be Remembered.mp3"
   },
   {
     id: 3,
-    img: 'martin 7.jpeg',
+    img: './youtube-music/martin 7.jpeg',
     title: "Martin Garrix Live @ Ultra Music Festival Miami 2023",
     artist: "Martin Garrix",
     music: "./carry you.mp3"
 },
 {
   id: 4,
-  img: 'martin 2.jpeg',
+  img: './youtube-music/martin 2.jpeg',
   title: "Starlight",
   artist: "Martin Garrix",
-  music: "./carry you.mp3"
+  music: "./youtube-music/carry you.mp3"
 },
 {
   id: 5,
