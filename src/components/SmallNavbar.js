@@ -95,9 +95,9 @@ const SmallNavbar = () => {
         {isOpen && (
         <div className="dropdown">
           <ul>
-            <li><IconButton sx={{color:'white',fontSize:"1em"}} href='/register' > Sign Up
+            <li><IconButton sx={{color:'white',fontSize:"1em"}} href='/youtube-music/register' > Sign Up
             </IconButton></li>
-            <li><IconButton sx={{color:'white',fontSize:"1em"}} href='/login' > Login
+            <li><IconButton sx={{color:'white',fontSize:"1em"}} href='/youtube-music/login' > Login
             </IconButton></li>
           </ul>
         </div>

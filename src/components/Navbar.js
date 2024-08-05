@@ -105,16 +105,16 @@ const Navbar = () => {
         {authUser ? (
         <>
         <Box display={"flex"}>
-        <IconButton sx={{color:'white',fontSize:"1em"}} href='/profile' > <Avatar src={authUser.photo} alt={authUser.firstName}/>
+        <IconButton sx={{color:'white',fontSize:"1em"}} href='/youtube-music/profile' > <Avatar src={authUser.photo} alt={authUser.firstName}/>
           </IconButton>
           </Box>
           </>
 
       ) : (
         <Box display={"flex"}>
-        <IconButton sx={{color:'white',fontSize:"1em"}} href='/register' > Sign Up
+        <IconButton sx={{color:'white',fontSize:"1em"}} href='/youtube-music/register' > Sign Up
         </IconButton>
-        <IconButton sx={{color:'white',fontSize:"1em"}} href='/login'> Login
+        <IconButton sx={{color:'white',fontSize:"1em"}} href='/youtube-music/login'> Login
         </IconButton>
         </Box>
       )}
