@@ -29,7 +29,7 @@ const App = () => {
       }
   return (
    
-    <BrowserRouter>
+    <BrowserRouter basename="/youtube-music">
     
     <Box sx={{overflowX:"hidden", overflowY:"hidden",height:"100vh",width:"100vw"}}>
     <Stack sx={{overflowX:"hidden", overflowY:"hidden"}}>

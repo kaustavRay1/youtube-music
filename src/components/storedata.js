@@ -77,7 +77,7 @@ const data = [
 },
 {
   id: 10,
-  img: 'q4.jpeg',
+  img: './youtube-music/q4.jpeg',
   title: "Apologize",
   artist: "One Republic • Timbaland",
   music: "./youtube-music/carry you.mp3"
