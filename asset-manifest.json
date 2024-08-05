@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/youtube-music/static/css/main.d04b2938.css",
-    "main.js": "/youtube-music/static/js/main.9cea098c.js",
+    "main.js": "/youtube-music/static/js/main.454da071.js",
     "static/js/283.deadd4ce.chunk.js": "/youtube-music/static/js/283.deadd4ce.chunk.js",
     "static/js/954.9cab7e3b.chunk.js": "/youtube-music/static/js/954.9cab7e3b.chunk.js",
     "static/js/453.bc4e0979.chunk.js": "/youtube-music/static/js/453.bc4e0979.chunk.js",
@@ -9,7 +9,7 @@
     "static/js/922.a32b7c92.chunk.js": "/youtube-music/static/js/922.a32b7c92.chunk.js",
     "index.html": "/youtube-music/index.html",
     "main.d04b2938.css.map": "/youtube-music/static/css/main.d04b2938.css.map",
-    "main.9cea098c.js.map": "/youtube-music/static/js/main.9cea098c.js.map",
+    "main.454da071.js.map": "/youtube-music/static/js/main.454da071.js.map",
     "283.deadd4ce.chunk.js.map": "/youtube-music/static/js/283.deadd4ce.chunk.js.map",
     "954.9cab7e3b.chunk.js.map": "/youtube-music/static/js/954.9cab7e3b.chunk.js.map",
     "453.bc4e0979.chunk.js.map": "/youtube-music/static/js/453.bc4e0979.chunk.js.map",
@@ -18,6 +18,6 @@
   },
   "entrypoints": [
     "static/css/main.d04b2938.css",
-    "static/js/main.9cea098c.js"
+    "static/js/main.454da071.js"
   ]
 }
