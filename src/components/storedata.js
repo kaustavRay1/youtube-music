@@ -73,28 +73,28 @@ const data = [
   img: 'q2.jpeg',
   title: "When We're Gone",
   artist: "Mesto & Justin Mylo",
-  music: "carry you.mp3"
+  music: "Mesto & Justin Mylo - When We're Gone.mp3"
 },
 {
   id: 10,
   img: 'q4.jpeg',
   title: "Apologize",
   artist: "One Republic • Timbaland",
-  music: "carry you.mp3"
+  music: "Apologize.mp3"
 },
 {
   id: 11,
   img: 'q5.jpeg',
   title: "Circles",
   artist: "Post Malone • Hollywood's Bleeding",
-  music: "carry you.mp3"
+  music: "Post Malone - Circles.mp3"
 },
 {
   id: 12,
   img: 'q6.jpeg',
   title: "I Feel It Coming (feat. Daft Punk)",
   artist: "Song • The Weeknd",
-  music: "carry you.mp3"
+  music: "The Weeknd - I Feel It Coming ft. Daft Punk.mp3"
 },
 {
   id: 13,
