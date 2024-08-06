@@ -1,5 +1,5 @@
 {
-  "homepage" : "https://kaustavRay1.github.io/youtube-music/",
+  "homepage": "https://kaustavRay1.github.io/youtube-music/",
   "name": "youtube-music",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^10.12.3",
     "phosphor-react": "^1.4.1",
+    "randn": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
@@ -27,8 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
