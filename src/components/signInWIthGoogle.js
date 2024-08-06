@@ -19,7 +19,7 @@ function SignInwithGoogle() {
         toast.success("User logged in Successfully", {
           position: "top-center",
         });
-        window.location.href = "/";
+        window.location.href = "/youtube-music/";
       }
     });
   }
