@@ -1,4 +1,4 @@
-import { Stack, Box, Typography, Card, IconButton, Avatar } from '@mui/material';
+import { Stack, Box, Typography, Card, IconButton, Avatar, CardActionArea, CardContent } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { Fire, Play } from 'phosphor-react';
 import { Category } from './Category';
@@ -10,11 +10,14 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import SmallPlayer from './SmallPlayer';
 import Player from './Player';
 import Explore from './Explore';
+import data from './storedata';
+import data1 from './storedata1';
 const General = () => {
   
   const [dataToPass, setDataToPass] = useState(0);
   const[count, setCount]=useState(0);
   const[clicked, setClicked]= useState(false);
+  const [id, setId] = useState(1)
   const handleChange = (play1) => {
     setDataToPass(dataToPass + play1);
   };
@@ -80,7 +83,42 @@ const General = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
+  const arrayDataItems2 = data1.slice(1, 10).map(data1 => 
+      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "14em",backgroundColor:"black", }}>
+      <CardActionArea>
+        <CardContent>
+        <img src={data1.img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => {setDataToPass(data1.id); setClicked(true);}}><Play size={20} /></IconButton></Stack>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    )
+    function shuffleArray(array) {
+      var i, j, temp;
+      
+      for (i = array.length -1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i)) + 1;
+          temp = array[i];
+          array[i] =array[j];
+          array[j] = temp;
+      }
+      return array;
+  }
 
+  
+  ;
+  useEffect(() => {
+      
+      const handleOnLoad = () => {
+        console.log('Component loaded!');
+        shuffleArray(data)
+          setId((prevIndex) =>
+              prevIndex === data.length - 1 ? 0 : prevIndex + 1
+          );
+      };
+  
+      handleOnLoad(); 
+      return () => {};
+  }, []);
 
   return (
    <>
@@ -91,21 +129,9 @@ const General = () => {
     <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} alignItems={"center"} spacing={1}>
       <Typography fontSize={28} fontFamily={"sans-serif"} >Top Trending </Typography><Fire size={25} weight="bold"/></Stack>
       )}
-      <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-      
-        <Box display={"flex"}  sx={{overflowX:"scroll",width:"100%",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}  gap={2}>
-      <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(1).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' name={getDataById(1).id} >{getDataById(1).name} • {getDataById(1).artist}</Typography>
-<IconButton onClick={e => {setDataToPass(1); setClicked(true);}} sx={{color:"white"}}><Play size={20} name={getDataById(1).id} /></IconButton></Stack></Card></Box>
-<Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(2).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(2).name}</Typography>
-<IconButton   sx={{color:"white"}} onClick={e => {setDataToPass(2); setClicked(true);}}><Play size={20} /></IconButton>  <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "22em",backgroundColor:"black"}}><img src={getDataById(3).img} alt='Carry you' height="81.5%" width="100%" /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography className='title' >{getDataById(3).name}</Typography>
-<IconButton   sx={{color:"white"}} onClick={e => {setDataToPass(3); setClicked(true);}}><Play size={20} /></IconButton>   <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(4).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(4).name} • {getDataById(4).artist}</Typography>
-<IconButton   sx={{color:"white"}}><Play size={20} onClick={e => {setDataToPass(4); setClicked(true);}}/></IconButton>   <IconButton  sx={{color:"white"}}></IconButton></Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(5).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography className='title' >{getDataById(5).name} • {getDataById(5).artist}</Typography>
-<IconButton   sx={{color:"white"}}><Play size={20} onClick={e => {setDataToPass(5); setClicked(true);}}/></IconButton>   <IconButton  sx={{color:"white"}}></IconButton> </Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(6).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(6).name} • {getDataById(6).artist}</Typography>
-<IconButton   sx={{color:"white"}}><Play size={20} onClick={e => {setDataToPass(6); setClicked(true);}}/></IconButton>   <IconButton  sx={{color:"white"}}></IconButton> </Stack></Card></Box>  <Box> <Card sx={{ height: "17em", width: "14em",backgroundColor:"black"}}><img src={getDataById(7).img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"center",alignItems:"center",color:"white"}}><Typography  className='title' >{getDataById(7).name} • {getDataById(7).artist}</Typography>
-<IconButton   sx={{color:"white"}}><Play size={20} onClick={e => {setDataToPass(7); setClicked(true);}}/></IconButton>   <IconButton  sx={{color:"white"}}></IconButton> </Stack></Card></Box>
-        </Box>
-      </Stack>
-
+      <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
+ {arrayDataItems2}
+ </Box>
       <Stack p={2} spacing={1}>
       <Typography variant='p' fontSize={"14"}  fontFamily={"sans-serif"}>START RADIO BASED ON A SONG </Typography>
       <Typography variant="h3"  fontFamily={"sans-serif"}>Quick picks</Typography>

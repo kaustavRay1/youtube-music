@@ -1,9 +1,10 @@
-import { Stack, Box, Typography, Card, IconButton, Button, } from '@mui/material';
-import React, {useState} from 'react';
+import { Stack, Box, Typography, Card, CardActionArea,CardContent, IconButton, Button, } from '@mui/material';
+import React, {useState, useEffect} from 'react';
 import { MusicNote, ChartLineUp ,Smiley,ApplePodcastsLogo,Play } from 'phosphor-react';
 import {Link} from "react-router-dom";
 import SmallPlayer from './SmallPlayer';
 import Player from './Player';
+import data from './storedata'
 const Explore = () => {
   const [dataToPass, setDataToPass] = useState(0);
   const[count, setCount]=useState(0);
@@ -27,7 +28,51 @@ const Explore = () => {
     }
   };
 
+  const arrayDataItems = data.map(data => 
+    <li key={data.id}>
+      <p>{data.name}</p>
+      <span>{data.artist}</span>
+    </li>
+  )
+  const arrayDataItems2 = data.slice(1, 10).map(data => 
+    <Card key={data.id} sx={{ minHeight: "18em", minWidth: "14em",backgroundColor:"black", }}>
+      <CardActionArea>
+        <CardContent>
+        <img src={data.img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >{data.title}</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+   
 
+    )
+    function shuffleArray(array) {
+      var i, j, temp;
+
+      for (i = array.length -1; i > 0; i--) {
+          j = Math.floor(Math.random() * i);
+          temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+      }
+      return array;
+  }
+
+  const [id, setId] = useState(0)
+  const delay = 10000;
+
+  useEffect(() => {
+      
+    const handleOnLoad = () => {
+      console.log('Component loaded!');
+      shuffleArray(data)
+        setId((prevIndex) =>
+            prevIndex === data.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    handleOnLoad(); 
+    return () => {};
+}, []);
   return (
     <>
     <Box gap={2} className="general" sx={{height:"74vh",position:"relative",width:"100%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,}}}>
@@ -37,6 +82,9 @@ const Explore = () => {
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"20em",height:"4em",}} variant='outlined'><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={12}><Smiley size={32} /> <Typography fontSize={19}>Mood and genres</Typography></Stack></Card>
   <Card sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"18em",height:"4em",}} variant='outlined'><Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} p={2} paddingRight={12}><ApplePodcastsLogo size={32} /><Typography fontSize={20}>Podcasts</Typography></Stack></Card>
   </Stack>
+  <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
+ {arrayDataItems2}
+ </Box>
   <Stack p={2} spacing={2}>
     <Typography fontSize={30}>New albums and singles</Typography>
     <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>

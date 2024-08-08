@@ -139,7 +139,7 @@ const data = [
   music: "carry you.mp3"
 },
 ];
-
+export default data;
 // Function to get data by ID
 export function getDataById(id) {
   const item = data.find(item => item.id === id);
