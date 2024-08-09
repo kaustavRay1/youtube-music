@@ -35,21 +35,21 @@ const data = [
   img: 'martin 2.jpeg',
   title: "Starlight",
   artist: "Martin Garrix",
-  music: "carry you.mp3"
+  music: "Martin Garrix, DubVision feat. Shaun Farrugia - Starlight (Keep Me Afloat) [Official Video].mp3"
 },
 {
   id: 5,
   img: 'martin 3.jpeg',
   title: "Limitless",
   artist: "Martin Garrix",
-  music: "carry you.mp3"
+  music: "Martin Garrix & Mesto - Limitless (Official Video).mp3"
 },
 {
   id: 6,
   img: 'martin 4.jpeg',
   title: "Ocean",
   artist: "Martin Garrix",
-  music: "carry you.mp3"
+  music: "Martin Garrix feat. Khalid - Ocean (Official Video).mp3"
 },
 {
   id: 7,
@@ -101,42 +101,42 @@ const data = [
   img: 'q7.jpeg',
   title: "Breakaway",
   artist: "Single • Martin Garrix, Mesto & WILHELM",
-  music: "carry you.mp3"
+  music: "Martin Garrix & Mesto - Breakaway (feat. WILHELM) [Official Video].mp3"
 },
 {
   id: 14,
   img: 'q8.jpeg',
   title: "Nevada (feat. Cozi Zuehlsdorff)",
   artist: "Song • Vicetone",
-  music: "carry you.mp3"
+  music: "Vicetone - Nevada (feat. Cozi Zuehlsdorff) [Monstercat Official Music Video].mp3"
 },
 {
   id: 15,
   img: 'q9.jpeg',
   title: "Waiting For Love",
   artist: "Avicii • Stories",
-  music: "carry you.mp3"
+  music: "Avicii - Waiting For Love.mp3"
 },
 {
   id: 16,
   img: 'q10.jpeg',
   title: "Hymn for the Weekend",
   artist: "Coldplay • A Head Full of Dreams",
-  music: "carry you.mp3"
+  music: "Coldplay - Hymn For The Weekend (Official Video).mp3"
 },
 {
   id: 17,
   img: 'q11.jpeg',
   title: "Stereo Hearts (feat. Adam Levine)",
   artist: "Gym Class Heroes • The Papercut Chronicles II",
-  music: "carry you.mp3"
+  music: "Gym Class Heroes - Stereo Hearts (Lyrics) _ Heart Stereo.mp3"
 },
 {
   id: 18,
   img: 'q12.jpeg',
   title: "We Are Young (feat. Janelle Monáe)",
   artist: "Fun",
-  music: "carry you.mp3"
+  music: "Fun._ We Are Young ft. Janelle Monáe [OFFICIAL VIDEO].mp3"
 },
 ];
 export default data;

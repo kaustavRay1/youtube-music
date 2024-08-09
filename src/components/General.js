@@ -14,36 +14,10 @@ import data from './storedata';
 import data1 from './storedata1';
 const General = ({onClick}) => {
   
-  const [dataToPass, setDataToPass] = useState(0);
-  const[count, setCount]=useState(0);
-  const[clicked, setClicked]= useState(false);
+
   const [id, setId] = useState(1);
   const [play2, setPlay2]=useState(0);
-  const handleChange = (play1) => {
-    setDataToPass(dataToPass + play1);
-  };
-  const incrementId = () => {
-    setDataToPass(prevId => prevId + 1);
-    setCount(count + 1);
-  };
-  const decrementId = () => {
-    if(clicked == true){
-      setCount(0);
-      setClicked(false);
-    } 
-    else if (count > 0  && dataToPass > count){
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId -1);
-    }
-    else if (count == dataToPass && count > 0){
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId -1);
-    }
-  };
-
-  
-  
-
+  const [clicked, setClicked]=useState(false);
   const [authUser, setAuthUser] = useState(null);
     
   useEffect(() => {
@@ -84,7 +58,7 @@ const General = ({onClick}) => {
   useEffect(() => {
     fetchUserData();
   }, []);
-  const arrayDataItems2 = data1.slice(1, 10).map(data1 => 
+  const arrayDataItems2 = data1.slice(0, 10).map(data1 => 
       <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black", aspectRatio:"4/3" }}>
       <CardActionArea>
         <CardContent>
@@ -93,10 +67,37 @@ const General = ({onClick}) => {
       </CardActionArea>
     </Card>
     )
+    const arrayDataItems3 = data1.slice(10, 14).map(data1 => 
+      <Card key={data1.id} sx={{backgroundColor:"black"}}>
+      <CardActionArea>
+        <CardContent>
+        <Box onClick={e => { onClick(data1.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data1.img} height={"100%"} width={"100%"} alt={data1.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data1.title}</Typography><Typography fontSize={14}>{data1.artist}</Typography></Stack></Stack></Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    )
+    const arrayDataItems4 = data1.slice(14, 18).map(data2 => 
+      <Card key={data2.id} sx={{backgroundColor:"black"}}>
+      <CardActionArea>
+        <CardContent>
+        <Box onClick={e => { onClick(data2.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    )
+    const arrayDataItems5 = data1.slice(4, 8).map(data2 => 
+      <Card key={data2.id} sx={{backgroundColor:"black"}}>
+      <CardActionArea>
+        <CardContent>
+        <Box onClick={e => { onClick(data2.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    )
     function shuffleArray(array) {
       var i, j, temp;
       
-      for (i = array.length -1; i > 0; i--) {
+      for (i = array.length -1; i >= 0; i--) {
           j = Math.floor(Math.random() * (i)) + 1;
           temp = array[i];
           array[i] =array[j];
@@ -104,6 +105,17 @@ const General = ({onClick}) => {
       }
       return array;
   }
+  function shuffleArray1(array1) {
+    var i, j, temp;
+    
+    for (i = array1.length -1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i)) + 1;
+        temp = array1[i];
+        array1[i] =array1[j];
+        array1[j] = temp;
+    }
+    return array1;
+}
 
   
   ;
@@ -115,7 +127,12 @@ const General = ({onClick}) => {
           setId((prevIndex) =>
               prevIndex === data1.length - 1 ? 0 : prevIndex + 1
           );
+          shuffleArray1(data1)
+          setId((prevIndex) =>
+              prevIndex === data1.length - 1 ? 0 : prevIndex + 1
+          );
       };
+      
   
       handleOnLoad(); 
       return () => {};
@@ -140,24 +157,13 @@ const General = ({onClick}) => {
      <Box p={2}>
      <Stack direction={"row"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
      <Stack direction={"column"} spacing={2} sx={{minWidth:"25em",}}>
-        
-      <Box onClick={e => {setDataToPass(8); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(8).img} height={"100%"} width={"100%"} alt={getDataById(8).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(8).name}</Typography><Typography fontSize={14}>{getDataById(8).artist}</Typography></Stack></Stack></Box>
-      <Box  onClick={e => {setDataToPass(9); setClicked(true);}} ><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(9).img} height={"100%"} width={"100%"} alt={getDataById(9).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(9).name}</Typography><Typography fontSize={14}>{getDataById(9).artist} • {getDataById(9).name}</Typography></Stack></Stack></Box>       
-      <Box onClick={e => {setDataToPass(7); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(7).img} height={"100%"} width={"100%"} alt={getDataById(7).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(7).name}</Typography><Typography fontSize={14}>{getDataById(7).artist} </Typography></Stack></Stack></Box>       
-      <Box  onClick={e => {setDataToPass(10); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(10).img} height={"100%"} width={"100%"} alt={getDataById(10).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(10).name}</Typography><Typography fontSize={14} >{getDataById(10).artist}</Typography></Stack></Stack></Box>
-    
+     {arrayDataItems3}
       </Stack>
       <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box onClick={e => {setDataToPass(11); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(11).img} height={"100%"} width={"100%"} alt={getDataById(11).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(11).name}</Typography><Typography fontSize={14}>{getDataById(11).artist}</Typography></Stack></Stack></Box>
-      <Box onClick={e => {setDataToPass(12); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(12).img} height={"100%"} width={"100%"} alt={getDataById(12).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(12).name}</Typography><Typography fontSize={14}>{getDataById(12).artist}</Typography></Stack></Stack></Box>       
-      <Box onClick={e => {setDataToPass(10); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(13).img} height={"100%"} width={"100%"} alt={getDataById(13).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(13).name}</Typography><Typography fontSize={14}>{getDataById(13).artist}</Typography></Stack></Stack></Box>       
-      <Box onClick={e => {setDataToPass(10); setClicked(true);}}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(14).img} height={"100%"} width={"100%"} alt={getDataById(14).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(14).name}</Typography><Typography fontSize={14}>{getDataById(14).artist}</Typography></Stack></Stack></Box>
+      {arrayDataItems4}
       </Stack>
       <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(15).img} height={"100%"} width={"100%"} alt={getDataById(15).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(15).name}</Typography><Typography fontSize={14}>{getDataById(15).artist}</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(16).img} height={"100%"} width={"100%"} alt={getDataById(16).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(16).name}</Typography><Typography fontSize={14}>{getDataById(16).artist}</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(17).img} height={"100%"} width={"100%"} alt={getDataById(17).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(17).name}</Typography><Typography fontSize={14}>{getDataById(17).artist}</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={getDataById(18).img} height={"100%"} width={"100%"} alt={getDataById(18).name} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{getDataById(18).name}</Typography><Typography fontSize={14}>{getDataById(18).artist}</Typography></Stack></Stack></Box>
+      {arrayDataItems5}
       </Stack>
       </Stack>
       </Box>
