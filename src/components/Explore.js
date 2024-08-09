@@ -178,11 +178,11 @@ const Explore = () => {
   </Stack>
   </Stack>
   </Box>
-  <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
+  {/* <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
  
   <Box className="small-player"><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId}/></Box>
   <Box className="player"><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId}/></Box>
-   </Box>
+   </Box> */}
    </>
   )
 }

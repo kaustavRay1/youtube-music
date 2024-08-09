@@ -1,0 +1,28 @@
+@media screen and (min-width : 1000px) {
+    .playerbtn1{
+        display: none;
+       }
+    .playerbtn{
+        padding-left:2%;
+        padding-right: 2%;
+        align-content:center;
+        justify-content:space-between;
+        min-width:18em;
+        display: flex;
+       } 
+         
+  }
+@media screen and (max-width : 1000px) {
+    .playerbtn{
+        display: none;
+       }
+       .playerbtn1{
+        padding-left: 2%;
+        padding-right: 2%;
+        align-content:center;
+        justify-content:space-between;
+        min-width:18em;
+        display: flex;
+       }
+  }
+

@@ -12,11 +12,12 @@ import Profile from "./components/profile";
 import Loading from './components/Loading';
 import SkeletonLoader from './components/SkeletonLoader';
 import "./App.css";
+import SmallPlayer from './components/SmallPlayer';
 const General = lazy(()=> import('./components/General'));
 const Explore = lazy(()=> import('./components/Explore'));
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-    
+  const [dataToPass, setDataToPass] = useState(0);
       useEffect(() => {
         // Simulate an API call
         setTimeout(() => {
@@ -27,6 +28,9 @@ const App = () => {
       if (isLoading) {
         return <Loading />;
       }
+      const playing = (play2) => {
+        setDataToPass(play2);
+      };
   return (
    
     <BrowserRouter basename="/youtube-music">
@@ -52,7 +56,7 @@ const App = () => {
     
     <Suspense fallback={<div><SkeletonLoader/></div>}>
     <Switch>
-    <Route path="/home" ><General/></Route>
+    <Route path="/home" ><General onClick={playing}/></Route>
     <Route path="/explore"><Explore /></Route>
     <Route path="/library"><Library/></Route>
     <Route path="/login" ><Login/></Route>
@@ -61,10 +65,7 @@ const App = () => {
     <Redirect from="/" to="/home"/>
     </Switch>
     </Suspense>
-    
-    
-   
-        
+    <Box><Player data1={dataToPass}/></Box>
     </Box>
   </Stack>
   </Stack>

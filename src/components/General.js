@@ -12,12 +12,13 @@ import Player from './Player';
 import Explore from './Explore';
 import data from './storedata';
 import data1 from './storedata1';
-const General = () => {
+const General = ({onClick}) => {
   
   const [dataToPass, setDataToPass] = useState(0);
   const[count, setCount]=useState(0);
   const[clicked, setClicked]= useState(false);
-  const [id, setId] = useState(1)
+  const [id, setId] = useState(1);
+  const [play2, setPlay2]=useState(0);
   const handleChange = (play1) => {
     setDataToPass(dataToPass + play1);
   };
@@ -84,10 +85,10 @@ const General = () => {
     fetchUserData();
   }, []);
   const arrayDataItems2 = data1.slice(1, 10).map(data1 => 
-      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "14em",backgroundColor:"black", }}>
+      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black", aspectRatio:"4/3" }}>
       <CardActionArea>
         <CardContent>
-        <img src={data1.img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => {setDataToPass(data1.id); setClicked(true);}}><Play size={20} /></IconButton></Stack>
+        <img src={data1.img} alt='Carry you' /><Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true);  }}><Play size={20} /></IconButton></Stack>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -110,9 +111,9 @@ const General = () => {
       
       const handleOnLoad = () => {
         console.log('Component loaded!');
-        shuffleArray(data)
+        shuffleArray(data1)
           setId((prevIndex) =>
-              prevIndex === data.length - 1 ? 0 : prevIndex + 1
+              prevIndex === data1.length - 1 ? 0 : prevIndex + 1
           );
       };
   
@@ -129,7 +130,7 @@ const General = () => {
     <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} alignItems={"center"} spacing={1}>
       <Typography fontSize={28} fontFamily={"sans-serif"} >Top Trending </Typography><Fire size={25} weight="bold"/></Stack>
       )}
-      <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
+      <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={1}>
  {arrayDataItems2}
  </Box>
       <Stack p={2} spacing={1}>
@@ -232,12 +233,12 @@ const General = () => {
       </Box>
       
    </Box>
-   <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
+  {/*  <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
  
-   <Box ><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} /></Box>
+  <Box ><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} /></Box>
    <Box className="player"><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
    <Box display={"none"}><Explore data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
-    </Box>
+    </Box>*/}
     
     </>
   )

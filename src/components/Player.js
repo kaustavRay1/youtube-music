@@ -1,9 +1,10 @@
 import { Stack, Typography, IconButton, Box } from '@mui/material'
-import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, } from 'phosphor-react'
+import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, Screencast } from 'phosphor-react'
 import Sidebar from './Sidebar';
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
+import "./Player.css"
 export default function Player({ data1, incrementId, decrementId, onChange}) {
 
   const [isPlaying, setIsPlaying] = useState(true);
@@ -65,7 +66,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
     }
   }, [volume, isPlaying])
   const [isDisabled, setIsDisabled] = useState(false);
-  useEffect(() => {
+  {/*useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
       setIsDisabled(screenWidth < 1000);
@@ -76,7 +77,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, []);*/}
 
   if (isDisabled) {
     return null;
@@ -90,7 +91,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
     step={1}
     max={timeRemaining}
     onChange={handleSliderChange} />
-<Stack direction={"row"} sx={{paddingLeft:2, alignContent:"center", justifyContent:"space-between", minWidth:"18em" }} spacing={1}>
+<Box className="playerbtn">
     <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>
           <IconButton sx={{ color: "white" }} onClick={decrementId} ><SkipBack weight='fill' size={24} /></IconButton>
@@ -111,7 +112,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <IconButton sx={{ color: "white" }}><DotsThreeOutlineVertical size={24} /></IconButton>
       </Box>
       </Box>
-      <Box display={"flex"} gap={2} sx={{alignItems:"center", minWidth:"15em"}}>
+      <Box gap={2} sx={{alignItems:"center", minWidth:"15em", display: "flex", paddingRight: 4}}>
       <Stack direction={"row"}  spacing={1} sx={{alignItems:"center"}}> <SpeakerHigh size={24}  onPointerEnter={e => {
                      setStyle({display: 'block',width:50,color:"red"});
                  }}
@@ -131,7 +132,22 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <Shuffle size={24} />
           <CaretUp size={24} />
       </Box>
-      </Stack>
+      </Box>
+      <Box className="playerbtn1">
+        <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
+          <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
+          <Stack>
+            <Typography variant='caption2'>{getDataById(data1).name}</Typography>
+            <Typography variant='caption' >{getDataById(data1).artist}</Typography>
+          </Stack>
+          
+          </Box>
+          <Stack direction={"row"} alignItems="center" paddingRight={2}>
+          <Typography  variant='caption' sx={{ color: "white" }}>{formatDuration(`${position}`)}/-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
+          <IconButton sx={{color:'white'}} ><Screencast size={30} /></IconButton>
+          {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
+          </Stack>
+          </Box>
       </Stack>
       </>
   )
