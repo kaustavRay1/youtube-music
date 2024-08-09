@@ -1,5 +1,5 @@
 @media screen and (min-width : 1000px) {
-    .playerbtn1{
+    .playerbtn1, .playerbtn2{
         display: none;
        }
     .playerbtn{
@@ -23,6 +23,10 @@
         justify-content:space-between;
         min-width:18em;
         display: flex;
+       }
+       .playerbtn2{
+        width: 100%;
+        flex-direction: column;
        }
   }
 

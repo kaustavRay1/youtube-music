@@ -1,6 +1,6 @@
-import { Stack, Typography, IconButton, Box } from '@mui/material'
+import { Stack, Typography, IconButton, Box, Divider } from '@mui/material'
 import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, Screencast } from 'phosphor-react'
-import Sidebar from './Sidebar';
+import BottomBar from './BottomBar';
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
@@ -133,7 +133,8 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <CaretUp size={24} />
       </Box>
       </Box>
-      <Box className="playerbtn1">
+      <Box className="playerbtn2">
+        <Box className="playerbtn1">
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
           <Stack>
@@ -147,7 +148,13 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <IconButton sx={{color:'white'}} ><Screencast size={30} /></IconButton>
           {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
           </Stack>
+         
           </Box>
+          <Box paddingTop={1}>
+          <Divider color="white"/>
+          <Box paddingTop={1}><BottomBar/></Box>
+          </Box>
+          </Box>  
       </Stack>
       </>
   )

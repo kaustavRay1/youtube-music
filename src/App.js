@@ -16,6 +16,30 @@ import SmallPlayer from './components/SmallPlayer';
 const General = lazy(()=> import('./components/General'));
 const Explore = lazy(()=> import('./components/Explore'));
 const App = () => {
+  const[count, setCount]=useState(0);
+  const[clicked, setClicked]= useState(false);
+  const handleChange = (play1) => {
+    setDataToPass(dataToPass + play1);
+  };
+  const incrementId = () => {
+    setDataToPass(prevId => prevId + 1);
+    setCount(count + 1);
+  };
+  const decrementId = () => {
+    if(clicked == true){
+      setCount(0);
+      setClicked(false);
+    } 
+    else if (count > 0  && dataToPass > count){
+      setCount(count => count - 1);
+      setDataToPass(prevId => prevId -1);
+    }
+    else if (count == dataToPass && count > 0){
+      setCount(count => count - 1);
+      setDataToPass(prevId => prevId -1);
+    }
+  };
+
   const [isLoading, setIsLoading] = useState(true);
   const [dataToPass, setDataToPass] = useState(0);
       useEffect(() => {
@@ -65,7 +89,7 @@ const App = () => {
     <Redirect from="/" to="/home"/>
     </Switch>
     </Suspense>
-    <Box><Player data1={dataToPass}/></Box>
+    <Box><Player data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange}/></Box>
     </Box>
   </Stack>
   </Stack>
