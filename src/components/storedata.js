@@ -138,6 +138,34 @@ const data = [
   artist: "Fun",
   music: "Fun._ We Are Young ft. Janelle Monáe [OFFICIAL VIDEO].mp3"
 },
+{
+  id: 19,
+  img: 'q13.jpeg',
+  title: "Bad Boy (feat. Luana Kiara)",
+  artist: "Tungevaag & Raaban",
+  music: "Tungevaag & Raaban - Bad Boy (feat. Luana Kiara).mp3"
+},
+{
+  id: 20,
+  img: 'q14.jpeg',
+  title: "Faded",
+  artist: "Alan Walker",
+  music: "Alan Walker - Faded.mp3"
+},
+{
+  id: 21,
+  img: 'q15.jpeg',
+  title: "Unstoppable",
+  artist: "Sia",
+  music: "Sia - Unstoppable (Lyrics).mp3"
+},
+{
+  id: 22,
+  img: 'q16.jpeg',
+  title: "Something Just Like This",
+  artist: "Coldplay",
+  music: "The Chainsmokers & Coldplay - Something Just Like This (Lyrics).mp3"
+},
 ];
 export default data;
 // Function to get data by ID

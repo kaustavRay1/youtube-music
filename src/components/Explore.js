@@ -2,43 +2,17 @@ import { Stack, Box, Typography, Card, CardActionArea,CardContent, IconButton, B
 import React, {useState, useEffect} from 'react';
 import { MusicNote, ChartLineUp ,Smiley,ApplePodcastsLogo,Play } from 'phosphor-react';
 import {Link} from "react-router-dom";
-import SmallPlayer from './SmallPlayer';
-import Player from './Player';
 import data from './storedata'
-const Explore = () => {
+import data1 from './storedata1';
+const Explore = ({onClick}) => {
   const [dataToPass, setDataToPass] = useState(0);
   const[count, setCount]=useState(0);
   const[clicked, setClicked]= useState(false);
-  const incrementId = () => {
-    setDataToPass(prevId => prevId + 1);
-    setCount(count + 1);
-  };
-  const decrementId = () => {
-    if(clicked == true){
-      setCount(0);
-      setClicked(false)
-    } 
-    else if (count > 0  && dataToPass > count){
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId -1);
-    }
-    else if (count == dataToPass && count > 0){
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId -1);
-    }
-  };
-
-  const arrayDataItems = data.map(data => 
-    <li key={data.id}>
-      <p>{data.name}</p>
-      <span>{data.artist}</span>
-    </li>
-  )
-  const arrayDataItems2 = data.slice(1, 10).map(data => 
-    <Card key={data.id} sx={{ minHeight: "18em", minWidth: "14em",backgroundColor:"black", }}>
+  const arrayDataItems2 = data1.slice(1,10).map(data1 => 
+    <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "14em",backgroundColor:"black", }}>
       <CardActionArea>
         <CardContent>
-        <img src={data.img} alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >{data.title}</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack>
+        <img src={data1.img} alt={data1.title} /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true);  }}><Play size={20} /></IconButton></Stack>
         </CardContent>
       </CardActionArea>
     </Card>

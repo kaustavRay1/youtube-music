@@ -7,10 +7,6 @@ import { getDataById } from "./storedata";
 import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import SmallPlayer from './SmallPlayer';
-import Player from './Player';
-import Explore from './Explore';
-import data from './storedata';
 import data1 from './storedata1';
 const General = ({onClick}) => {
   
@@ -156,13 +152,13 @@ const General = ({onClick}) => {
       </Stack>
      <Box p={2}>
      <Stack direction={"row"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
-     <Stack direction={"column"} spacing={2} sx={{minWidth:"25em",}}>
+     <Stack direction={"column"} spacing={-2} sx={{minWidth:"25em",}}>
      {arrayDataItems3}
       </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
+      <Stack direction={"column"} spacing={-2} sx={{minWidth: "25em",}}>
       {arrayDataItems4}
       </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
+      <Stack direction={"column"} spacing={-2} sx={{minWidth: "25em",}}>
       {arrayDataItems5}
       </Stack>
       </Stack>

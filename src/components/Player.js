@@ -5,52 +5,27 @@ import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
-export default function Player({ data1, incrementId, decrementId, onChange}) {
-
-  const [isPlaying, setIsPlaying] = useState(true);
+import playerEnlarged from './playerEnlarged';
+import {Link} from 'react-router-dom';
+const TargetComponent = () => {
+  <Box><playerEnlarged/></Box>
+};
+export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick}) {
+  const [sc,setSc] =useState(false);
   const[timeRemaining, setTimeRemaining]= useState(0);
+  const targetRef = useRef();
+  const targetRef1 = useRef();
 
-  const myRef = useRef();
- 
-
-  const start = () => {
-    myRef.current.play();
-      setIsPlaying(true);
-  }
-  const pauseAudio = () => {
-    console.log("here");
-    myRef.current.pause();
-    setIsPlaying(false);
-  }
   const [style, setStyle] = useState({ display: 'none'});
   
   const [position, setPosition] = useState(0);
   
-  function formatDuration(value) {
-    if(value && !isNaN(value))
-    {
-      
-    const minute = Math.floor(value / 60);
-    const secondLeft = value - minute * 60;
-    return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-    }
-    else{
-      return '00:00';
-    }
-  }
   const [play1, setPlay1]=useState(1);
   const playNext = () => {
   setPlay1(play1 + 1);
   onChange(play1);
   };
   const [currentTime, setCurrentTime] = useState(0);
-  const handleSliderChange = (e) => {
-    const newTime = e.target.value;
-    myRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-
   const [volume, setVolume]=useState(30);
   useEffect(() => {
     if(myRef){
@@ -92,7 +67,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
     max={timeRemaining}
     onChange={handleSliderChange} />
 <Box className="playerbtn">
-    <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
+    <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}  >
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>
           <IconButton sx={{ color: "white" }} onClick={decrementId} ><SkipBack weight='fill' size={24} /></IconButton>
          {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
@@ -102,7 +77,7 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
       </Box>
       <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
       <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
-      <Stack>
+      <Stack onClick={() => targetRef.current.scrollIntoView()}>
         <Typography>{getDataById(data1).name}</Typography>
         <Typography variant='caption' >{getDataById(data1).artist}</Typography>
       </Stack>
@@ -130,14 +105,14 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
             /></Box></Stack>
           <Repeat size={24} />
           <Shuffle size={24} />
-          <CaretUp size={24} />
-      </Box>
+          <CaretUp size={24} onClick={(e) =>{setSc(true); onClick(sc);}} />
+      </Box> 
       </Box>
       <Box className="playerbtn2">
         <Box className="playerbtn1">
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
-          <Stack>
+          <Stack onClick={(e) =>{setSc(true); onClick(sc);}}>
             <Typography variant='caption2'>{getDataById(data1).name}</Typography>
             <Typography variant='caption' >{getDataById(data1).artist}</Typography>
           </Stack>
@@ -154,8 +129,10 @@ export default function Player({ data1, incrementId, decrementId, onChange}) {
           <Divider color="white"/>
           <Box paddingTop={1}><BottomBar/></Box>
           </Box>
-          </Box>  
+          </Box>       
+          <playerEnlarged position={position} timeRemaining={timeRemaining}  currentTime={currentTime}  sc={sc} setSc={setSc}/>
       </Stack>
+     
       </>
   )
 }

@@ -1,5 +1,7 @@
 body{
   cursor: auto;
+  background-color: black;
+  color: white;
 }
 @media screen and (max-width : 1000px) {
   .sidebar{

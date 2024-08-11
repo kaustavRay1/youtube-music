@@ -3,7 +3,7 @@ import {Box,Stack,Card,Typography,IconButton,Button,Link} from "@mui/material"
 import {Play} from "phosphor-react"
 const Library = () => {
   return (
-    <Stack  p={1} spacing={2} sx={{height:"74vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4, },paddingLeft:"1%"}}>
+    <Stack  p={1} spacing={2} sx={{height:"64vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4, },paddingLeft:"1%"}}>
        <Box p={2}>
       <Stack overflow={"auto"} direction={"row"} sx={{overflowY:"hidden"}} spacing={2} height={30} p={1} position={"relative"}><Link to="/Relax"><Button sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)",minWidth:"9em"}} variant='outlined'><Typography fontSize={14} fontFamily={"sans-serif"}>Playlists</Typography></Button></Link>
       <Link to="/Relax"><Button sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)", minWidth:"8em"}} variant='outlined' ><Typography fontSize={14} fontFamily={"sans-serif"}>Songs</Typography></Button></Link>
