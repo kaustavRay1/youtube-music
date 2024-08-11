@@ -7,8 +7,30 @@ import {Link} from "react-router-dom";
 import { getDataById } from "./storedata";
 import "./Player.css"
 
-const PlayerEnlarged = ({ data2, incrementId, decrementId,start, formatDuration, pauseAudio, handleSliderChange, isPlaying, timeRemaining, position, onClick, }) => {
+const PlayerEnlarged = ({ data2, incrementId, decrementId,start, formatDuration, pauseAudio, handleSliderChange, isPlaying, onClick, myRef, onChange }) => {
   const [sc1, setSc1] = useState(false);
+  const [play1, setPlay1]=useState(1);
+  const[timeRemaining, setTimeRemaining]= useState(0);
+  const [position, setPosition] = useState(0);
+  const playNext = () => {
+  setPlay1(play1 + 1);
+  onChange(play1);
+  };
+  const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume]=useState(30);
+  useEffect(() => {
+    if(myRef){
+    myRef.current.volume= volume/100;
+    }
+    if(isPlaying){
+      setInterval(() => {
+        const _duration =Math.floor(myRef?.current?.duration); // seconds
+        setTimeRemaining(_duration);
+        const _elapsed =Math.floor(myRef?.current?.currentTime);
+        setPosition(_elapsed);
+      }, 100);
+    }
+  }, [volume, isPlaying])
   return (
    <>
     

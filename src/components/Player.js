@@ -77,7 +77,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
       </Box>
       <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
       <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
-      <Stack onClick={() => targetRef.current.scrollIntoView()}>
+      <Stack>
         <Typography>{getDataById(data1).name}</Typography>
         <Typography variant='caption' >{getDataById(data1).artist}</Typography>
       </Stack>
