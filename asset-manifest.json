@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/youtube-music/static/css/main.613596ed.css",
-    "main.js": "/youtube-music/static/js/main.97b93071.js",
-    "static/js/384.f1ecba69.chunk.js": "/youtube-music/static/js/384.f1ecba69.chunk.js",
+    "main.js": "/youtube-music/static/js/main.166b8b85.js",
+    "static/js/384.a28975b7.chunk.js": "/youtube-music/static/js/384.a28975b7.chunk.js",
     "static/js/922.b32e685a.chunk.js": "/youtube-music/static/js/922.b32e685a.chunk.js",
     "static/js/453.bc4e0979.chunk.js": "/youtube-music/static/js/453.bc4e0979.chunk.js",
-    "static/js/499.3e605185.chunk.js": "/youtube-music/static/js/499.3e605185.chunk.js",
+    "static/js/858.0bc178a7.chunk.js": "/youtube-music/static/js/858.0bc178a7.chunk.js",
     "index.html": "/youtube-music/index.html",
     "main.613596ed.css.map": "/youtube-music/static/css/main.613596ed.css.map",
-    "main.97b93071.js.map": "/youtube-music/static/js/main.97b93071.js.map",
-    "384.f1ecba69.chunk.js.map": "/youtube-music/static/js/384.f1ecba69.chunk.js.map",
+    "main.166b8b85.js.map": "/youtube-music/static/js/main.166b8b85.js.map",
+    "384.a28975b7.chunk.js.map": "/youtube-music/static/js/384.a28975b7.chunk.js.map",
     "922.b32e685a.chunk.js.map": "/youtube-music/static/js/922.b32e685a.chunk.js.map",
     "453.bc4e0979.chunk.js.map": "/youtube-music/static/js/453.bc4e0979.chunk.js.map",
-    "499.3e605185.chunk.js.map": "/youtube-music/static/js/499.3e605185.chunk.js.map"
+    "858.0bc178a7.chunk.js.map": "/youtube-music/static/js/858.0bc178a7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.613596ed.css",
-    "static/js/main.97b93071.js"
+    "static/js/main.166b8b85.js"
   ]
 }
