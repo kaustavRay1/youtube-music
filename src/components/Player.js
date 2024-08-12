@@ -5,13 +5,8 @@ import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
-import playerEnlarged from './playerEnlarged';
-import {Link} from 'react-router-dom';
-const TargetComponent = () => {
-  <Box><playerEnlarged/></Box>
-};
 export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick}) {
-  const [sc,setSc] =useState(false);
+  const sc=true;
   const[timeRemaining, setTimeRemaining]= useState(0);
   const targetRef = useRef();
   const targetRef1 = useRef();
@@ -105,14 +100,14 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
             /></Box></Stack>
           <Repeat size={24} />
           <Shuffle size={24} />
-          <CaretUp size={24} onClick={(e) =>{setSc(true); onClick(sc);}} />
+          <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 
       </Box>
       <Box className="playerbtn2">
         <Box className="playerbtn1">
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>
-          <Stack onClick={(e) =>{setSc(true); onClick(sc);}}>
+          <Stack onClick={(e) =>{onClick(sc);}}>
             <Typography variant='caption2'>{getDataById(data1).name}</Typography>
             <Typography variant='caption' >{getDataById(data1).artist}</Typography>
           </Stack>
@@ -130,7 +125,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
           <Box paddingTop={1}><BottomBar/></Box>
           </Box>
           </Box>       
-          <playerEnlarged position={position} timeRemaining={timeRemaining}  currentTime={currentTime}  sc={sc} setSc={setSc}/>
+          <playerEnlarged position={position} timeRemaining={timeRemaining}  currentTime={currentTime}  sc={sc}/>
       </Stack>
      
       </>

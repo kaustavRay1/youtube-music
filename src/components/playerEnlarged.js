@@ -8,7 +8,7 @@ import { getDataById } from "./storedata";
 import "./Player.css"
 
 const PlayerEnlarged = ({ data2, incrementId, decrementId,start, formatDuration, pauseAudio, handleSliderChange, isPlaying, onClick, myRef, onChange }) => {
-  const [sc1, setSc1] = useState(false);
+  const sc1 = true;
   const [play1, setPlay1]=useState(1);
   const[timeRemaining, setTimeRemaining]= useState(0);
   const [position, setPosition] = useState(0);
@@ -51,7 +51,7 @@ const PlayerEnlarged = ({ data2, incrementId, decrementId,start, formatDuration,
          {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
           <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
           <Typography variant='caption' sx={{ color: "white" }}>{formatDuration(`${position}`)}/-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
-        <Box paddingLeft={"15%"}> <CaretUp size={26}  onClick={(e) =>{ setSc1(true); onClick(sc1);}}/></Box>
+        <Box paddingLeft={"15%"}> <CaretUp size={26}  onClick={(e) =>{ onClick(sc1);}}/></Box>
         </Stack>
         </Box>
     </Box>

@@ -138,7 +138,7 @@ const App = () => {
     <Switch>
     <Route path="/home" ><General onClick={playing}/></Route>
     <Route path="/explore"><Explore onClick={playing} /></Route>
-    <Route path="/library"><playerEnlarged onClick={playing}/></Route>
+    <Route path="/library"><Library/></Route>
     <Route path="/login" ><Login/></Route>
     <Route path="/register"><SignUp /></Route>
     <Route path="/profile"><Profile /></Route>
