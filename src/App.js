@@ -131,9 +131,9 @@ const App = () => {
     <Sidebar/>
 
     </Box>
-    <Box sx={{width:"100%",height:"86vh",color:"#fff",}}>
+    <Box sx={{width:"100%",height:"86vh", minHeight:"20vh",color:"#fff",}}>
    
-    
+    <Box sx={{width:"100%", minHeight:"20vh",color:"#fff",}}>
     <Suspense fallback={<div><SkeletonLoader/></div>}>
     <Switch>
     <Route path="/home" ><General onClick={playing}/></Route>
@@ -145,11 +145,10 @@ const App = () => {
     <Redirect from="/" to="/home"/>
     </Switch>
     </Suspense>
-    
+    </Box>
     <Box ><Player data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} myRef={myRef} formatDuration={formatDuration} start={start} pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} isPlaying={isPlaying} setIsPlaying={setIsPlaying} onClick={scroll} /></Box>
      
     </Box>
-    
   </Stack>
   </Stack>
   <Box ref={targetRef}  sx={{ height: "100vh",alignItems:"center", justifyContent:"center", width:"100%",}}>

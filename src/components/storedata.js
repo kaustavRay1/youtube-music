@@ -25,10 +25,10 @@ const data = [
   },
   {
     id: 3,
-    img: 'martin 7.jpeg',
-    title: "Martin Garrix Live @ Ultra Music Festival Miami 2023",
-    artist: "Martin Garrix",
-    music: "carry you.mp3"
+    img: 'espresso.jpeg',
+    title: "Espresso",
+    artist: "Sabrina Carpenter",
+    music: "Espresso.mp3"
 },
 {
   id: 4,

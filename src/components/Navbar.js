@@ -6,6 +6,7 @@ import SwipeableTemporaryDrawer from './SwipeableTemporaryDrawer';
 import { auth, db, } from "./firebase";
 import { doc, getDoc, } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import data1 from "./storedata1";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: 5,
@@ -33,7 +34,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const Navbar = () => {
   const [authUser, setAuthUser] = useState(null);
-    
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -95,9 +95,9 @@ const Navbar = () => {
         <Stack sx={{ width: "80%", justifyContent: "center",}} spacing={2}>
           <Search>
             <SearchIconWrapper>
-              <MagnifyingGlass color="#709CE6" />
+              <IconButton><MagnifyingGlass color="#709CE6"  /></IconButton>
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search..." inputProps={{ "aria-label": "search" }}/>
+            <StyledInputBase placeholder="Search..." inputProps={{ "aria-label": "search" }}  />
           </Search>
         </Stack>
         <Stack direction="row" sx={{justifyContent: "space-between" }} spacing={1}>
