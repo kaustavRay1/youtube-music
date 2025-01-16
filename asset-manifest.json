@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/youtube-music/static/css/main.613596ed.css",
-    "main.js": "/youtube-music/static/js/main.6bdf55e2.js",
+    "main.js": "/youtube-music/static/js/main.3daec893.js",
     "static/js/384.cdbd07d2.chunk.js": "/youtube-music/static/js/384.cdbd07d2.chunk.js",
     "static/js/922.3816cfdf.chunk.js": "/youtube-music/static/js/922.3816cfdf.chunk.js",
     "static/js/453.bc4e0979.chunk.js": "/youtube-music/static/js/453.bc4e0979.chunk.js",
     "static/js/858.0bc178a7.chunk.js": "/youtube-music/static/js/858.0bc178a7.chunk.js",
     "index.html": "/youtube-music/index.html",
     "main.613596ed.css.map": "/youtube-music/static/css/main.613596ed.css.map",
-    "main.6bdf55e2.js.map": "/youtube-music/static/js/main.6bdf55e2.js.map",
+    "main.3daec893.js.map": "/youtube-music/static/js/main.3daec893.js.map",
     "384.cdbd07d2.chunk.js.map": "/youtube-music/static/js/384.cdbd07d2.chunk.js.map",
     "922.3816cfdf.chunk.js.map": "/youtube-music/static/js/922.3816cfdf.chunk.js.map",
     "453.bc4e0979.chunk.js.map": "/youtube-music/static/js/453.bc4e0979.chunk.js.map",
@@ -16,6 +16,6 @@
   },
   "entrypoints": [
     "static/css/main.613596ed.css",
-    "static/js/main.6bdf55e2.js"
+    "static/js/main.3daec893.js"
   ]
 }
