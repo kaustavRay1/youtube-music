@@ -1,5 +1,7 @@
 import { Stack, Typography, IconButton, Box, Divider, Card } from '@mui/material'
-import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, Screencast, RepeatOnce } from 'phosphor-react'
+import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown,
+   DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, 
+   Screencast, RepeatOnce } from 'phosphor-react'
 import BottomBar from './BottomBar';
 import React, { useState, useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
@@ -36,13 +38,15 @@ const PlayerEnlarged = ({ data2, incrementId,
   return (
     <>
 
-      <Box sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", display: "grid" }}>
+      <Box sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", display: "grid", backgroundColor:" rgba(148, 84, 84, 0.5)"}}>
         <Box gap={2} sx={{ alignItems: "center", justifyContent: "center", width: "100%", }}>
           <Box sx={{ height: "20em", width: "20em", }}>
             <img src={getDataById(data2).img} 
-          alt={getDataById(data2).name} height={"100%"} width={"100%"} /></Box>
-          <Typography sx={{ color: "white" }}>{getDataById(data2).name}</Typography>
-          <Typography sx={{ color: "white" }}>{getDataById(data2).artist}</Typography>
+          alt={getDataById(data2).name} height={"100%"} width={"100%"} style={{borderRadius:"10px", boxShadow:" 0 0 20px rgba(220, 220, 220, 0.5)"}}/></Box>
+          <Box paddingTop={2}>
+          <Typography variant='h4' sx={{ color: "white" }}>{getDataById(data2).name}</Typography>
+          <Typography variant='caption' sx={{ color: "white"}}>{getDataById(data2).artist}</Typography>
+          </Box>
           <Stack spacing={1} sx={{ alignItems: "center", justifyContent: "space-evenly", paddingTop: 3 }} direction={"row"}>
             {isRepeat ? (<IconButton sx={{ color: "white" }} onClick={repeat}> <RepeatOnce size={24} /></IconButton>
           ) : (
