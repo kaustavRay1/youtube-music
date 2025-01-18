@@ -38,7 +38,7 @@ const PlayerEnlarged = ({ data2, incrementId,
   return (
     <>
 
-      <Box sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", display: "grid", backgroundColor:" rgba(148, 84, 84, 0.5)"}}>
+      <Box sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", display: "grid", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
         <Box gap={2} sx={{ alignItems: "center", justifyContent: "center", width: "100%", }}>
           <Box sx={{ height: "20em", width: "20em", }}>
             <img src={getDataById(data2).img} 
@@ -72,14 +72,14 @@ const PlayerEnlarged = ({ data2, incrementId,
             <Typography variant='caption' sx={{ color: "white" }}>{formatDuration(`${position}`)}</Typography>
             <Typography variant='caption' sx={{ color: "white" }}>-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
           </Box>
-        </Box>
-        <Box gap={2} display={"flex"}>
+        
+        <Box gap={2} display={"flex"}  paddingTop={3}>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Up Next</Card>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Lyrics</Card>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Related</Card>
         </Box>
       </Box>
-
+      </Box>
     </>
   )
 }
