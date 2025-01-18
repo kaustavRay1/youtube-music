@@ -165,7 +165,7 @@ const App = () => {
           </Stack>
         </Stack>
         <Box ref={targetRef} sx={{ height: "100vh", alignItems: "center", justifyContent: "center", width: "100%", }}>
-          <Box> <PlayerEnlarged data2={dataToPass} 
+          <Box> <PlayerEnlarged data2={dataToPass} onClick1={playing} 
           incrementId={incrementId} decrementId={decrementId} onChange={handleChange} myRef={myRef}
            formatDuration={formatDuration} start={start} pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} 
            isPlaying={isPlaying} setIsPlaying={setIsPlaying} onClick={scroll1} repeat={repeat} 

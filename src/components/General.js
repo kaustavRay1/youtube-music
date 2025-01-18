@@ -233,12 +233,6 @@ const General = ({onClick}) => {
       </Box>
       
    </Box>
-  {/*  <Box sx={{height:"13vh", width:"90%", backgroundColor:"black", color:"white",overlay:"unset"}}>
- 
-  <Box ><SmallPlayer data1={dataToPass} incrementId={incrementId}  decrementId={decrementId} onChange={handleChange} /></Box>
-   <Box className="player"><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
-   <Box display={"none"}><Explore data1={dataToPass} incrementId={incrementId} decrementId={decrementId} onChange={handleChange}/></Box>
-    </Box>*/}
     
     </>
   )
