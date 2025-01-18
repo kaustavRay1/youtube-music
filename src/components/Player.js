@@ -1,11 +1,11 @@
 import { Stack, Typography, IconButton, Box, Divider } from '@mui/material'
-import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, Screencast } from 'phosphor-react'
+import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown, DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, Screencast, RepeatOnce } from 'phosphor-react'
 import BottomBar from './BottomBar';
 import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
-export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick}) {
+export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat }) {
   const sc=true;
   const[timeRemaining, setTimeRemaining]= useState(0);
   const targetRef = useRef();
@@ -54,7 +54,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
   }
   return (
     <>
-    <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}} onEnded={playNext}/>
+    <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}} onEnded={playNext} loop={isRepeat}/>
     <Stack direction={"column"}>
     <Slider aria-label="Default" sx={{ color: "red",height:2 }} value={position}
     min={0}
@@ -98,7 +98,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
               aria-label="Temperature"
               valueLabelDisplay="auto"
             /></Box></Stack>
-          <Repeat size={24} />
+             {isRepeat? (<IconButton sx={{ color: "white" }} onClick={repeat}> <RepeatOnce size={24} /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={repeat}> <Repeat size={24} weight="fill" /></IconButton>)} 
           <Shuffle size={24} />
           <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 

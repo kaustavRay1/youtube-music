@@ -32,7 +32,7 @@ function Profile() {
     }
   }
   return (
-    <div>
+    <div style={{height:"70vh", minHeight:"20vh"}}>
       {userDetails ? (
         <>
           <div style={{ }}>

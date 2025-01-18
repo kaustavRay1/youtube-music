@@ -55,10 +55,11 @@ const General = ({onClick}) => {
     fetchUserData();
   }, []);
   const arrayDataItems2 = data1.slice(0, 10).map(data1 => 
-      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black", aspectRatio:"4/3" }}>
+      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black",  }}>
       <CardActionArea>
         <CardContent>
-        <img src={data1.img} alt='Carry you' /><Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true);  }}><Play size={20} /></IconButton></Stack>
+        <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
+        <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true);  }}><Play size={20} /></IconButton></Stack>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -111,10 +112,7 @@ const General = ({onClick}) => {
         array1[j] = temp;
     }
     return array1;
-}
-
-  
-  ;
+};
   useEffect(() => {
       
       const handleOnLoad = () => {
