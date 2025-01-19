@@ -18,13 +18,22 @@ import SmallPlayer from './components/SmallPlayer';
 const General = lazy(() => import('./components/General'));
 const Explore = lazy(() => import('./components/Explore'));
 const App = () => {
-
+ const [shuffle, setShuffle] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isRepeat, setIsRepeat] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const targetRef = useRef(null);
   const targetRef1 = useRef();
   const myRef = useRef();
+  const shuffleBtn = () =>{
+    if(shuffle){
+      setShuffle(false);
+      console.log("ok");
+    }
+    else{
+      setShuffle(true);
+    }
+  }
   const repeat = () => {
     if (isRepeat) {
       setIsRepeat(false);
@@ -158,7 +167,7 @@ const App = () => {
               onChange={handleChange} myRef={myRef} formatDuration={formatDuration} start={start} 
               pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} isPlaying={isPlaying} 
               setIsPlaying={setIsPlaying} onClick={scroll} repeat={repeat} isRepeat={isRepeat} 
-              setIsRepeat={setIsRepeat} />
+              setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle}/>
               </Box>
 
             </Box>
@@ -169,7 +178,7 @@ const App = () => {
           incrementId={incrementId} decrementId={decrementId} onChange={handleChange} myRef={myRef}
            formatDuration={formatDuration} start={start} pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} 
            isPlaying={isPlaying} setIsPlaying={setIsPlaying} onClick={scroll1} repeat={repeat} 
-           isRepeat={isRepeat} setIsRepeat={setIsRepeat} /> </Box>
+           isRepeat={isRepeat} setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle}/> </Box>
         </Box>
       </Box>
     </BrowserRouter>

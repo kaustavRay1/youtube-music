@@ -5,18 +5,25 @@ import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
-export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat }) {
+export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle, }) {
   const sc=true;
   const[timeRemaining, setTimeRemaining]= useState(0);
   const targetRef = useRef();
   const targetRef1 = useRef();
-
+ 
   const [style, setStyle] = useState({ display: 'none'});
   
   const [position, setPosition] = useState(0);
   
   const [play1, setPlay1]=useState(1);
+  
   const playNext = () => {
+    let x = Math.floor((Math.random() * 10) + 1);
+    
+    if(shuffle){
+      console.log(x);
+      setPlay1(x);
+    }
   setPlay1(play1 + 1);
   onChange(play1);
   };
@@ -99,7 +106,9 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
               valueLabelDisplay="auto"
             /></Box></Stack>
              {isRepeat? (<IconButton sx={{ color: "white" }} onClick={repeat}> <RepeatOnce size={24} /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={repeat}> <Repeat size={24} weight="fill" /></IconButton>)} 
-          <Shuffle size={24} />
+          {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+                   ):(
+                   <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold" /></IconButton>)}
           <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 
       </Box>
@@ -125,7 +134,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
           <Box paddingTop={1}><BottomBar/></Box>
           </Box>
           </Box>       
-          <playerEnlarged position={position} timeRemaining={timeRemaining}  currentTime={currentTime}  sc={sc}/>
+          <playerEnlarged position={position} timeRemaining={timeRemaining}  currentTime={currentTime}  sc={sc}  />
       </Stack>
      
       </>

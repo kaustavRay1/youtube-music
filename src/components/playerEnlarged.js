@@ -14,7 +14,7 @@ import data1 from './storedata1';
 const PlayerEnlarged = ({ data2, incrementId, 
   decrementId, start, formatDuration, pauseAudio, handleSliderChange, 
   isPlaying, onClick, myRef, onChange, repeat, 
-  isRepeat, setIsRepeat, onClick1 }) => {
+  isRepeat, setIsRepeat, onClick1,shuffleBtn, setShuffle, shuffle }) => {
   const [id, setId] = useState(1);
   const sc1 = true;
   const [clicked, setClicked]=useState(false);
@@ -133,7 +133,9 @@ useEffect(() => {
             )}
               <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
             </Box>
-            <Shuffle size={24}/>
+            {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+          ):(
+          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle weight="bold"  size={24} /></IconButton>)}
             <Box> <CaretUp size={26} onClick={(e) => { onClick(sc1); }} /></Box>
           </Stack>
           
@@ -177,7 +179,9 @@ useEffect(() => {
             )}
               <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
             </Box>
-            <Box> <CaretUp size={26} onClick={(e) => { onClick(sc1); }} /></Box>
+           {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+          ):(
+          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold" /></IconButton>)}
           </Stack>
           <Slider aria-label="Default" sx={{ color: "red", height: 2 }} value={position}
             min={0}
