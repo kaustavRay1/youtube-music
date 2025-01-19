@@ -133,9 +133,9 @@ useEffect(() => {
             )}
               <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
             </Box>
-            {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+            {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold"/></IconButton>
           ):(
-          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle weight="bold"  size={24} /></IconButton>)}
+          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle   size={24} /></IconButton>)}
             <Box> <CaretUp size={26} onClick={(e) => { onClick(sc1); }} /></Box>
           </Stack>
           
@@ -179,9 +179,9 @@ useEffect(() => {
             )}
               <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
             </Box>
-           {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+           {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold"/></IconButton>
           ):(
-          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold" /></IconButton>)}
+          <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24}  /></IconButton>)}
           </Stack>
           <Slider aria-label="Default" sx={{ color: "red", height: 2 }} value={position}
             min={0}

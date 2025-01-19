@@ -106,9 +106,9 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
               valueLabelDisplay="auto"
             /></Box></Stack>
              {isRepeat? (<IconButton sx={{ color: "white" }} onClick={repeat}> <RepeatOnce size={24} /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={repeat}> <Repeat size={24} weight="fill" /></IconButton>)} 
-          {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} /></IconButton>
+          {shuffle? (<IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold" /></IconButton>
                    ):(
-                   <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24} weight="bold" /></IconButton>)}
+                   <IconButton sx={{ color: "white" }} onClick={shuffleBtn}> <Shuffle size={24}  /></IconButton>)}
           <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 
       </Box>
