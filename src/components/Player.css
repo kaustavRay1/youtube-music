@@ -25,7 +25,7 @@
         display: flex;
        }
        .playerbtn2{
-        width: 100%;
+        width: 100vw;
         flex-direction: column;
        }
   }

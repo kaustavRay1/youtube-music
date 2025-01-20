@@ -112,7 +112,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
           <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 
       </Box>
-      <Box className="playerbtn2">
+      <Box className="playerbtn2" onClick={(e) => { onClick(sc); }}>
         <Box className="playerbtn1">
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>

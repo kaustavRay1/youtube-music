@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   return (
-    <Stack spacing={3} alignContent={"center"} justifyContent={"center"}>
+    <Stack spacing={3} alignContent={"center"} justifyContent={"center"} padding={2}>
       <Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>
       <Link to="/home">
     <IconButton sx={{color:'white'}} ><Stack direction={"column"} sx={{justifyContent:"center",alignItems:"center",color:"white"}} spacing={1}>

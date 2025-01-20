@@ -97,7 +97,7 @@ useEffect(() => {
   return (
     <>
 
-      <Box className="playerbtn4" sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
+      <Box className="playerbtn4"  sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
         <Box sx={{justifyContent:"space-evenly", alignItems:"center", display:"flex", paddingTop:4, paddingX:2}}>
 
        
@@ -162,7 +162,7 @@ useEffect(() => {
             <img src={getDataById(data2).img} 
           alt={getDataById(data2).name} height={"100%"} width={"100%"} style={{borderRadius:"10px", boxShadow:" 0 0 20px rgba(220, 220, 220, 0.5)"}}/></Box>
           <Box paddingTop={2}>
-          <Typography variant='h4' sx={{ color: "white" }}>{getDataById(data2).name}</Typography>
+          <Typography variant='h6' sx={{ color: "white" }}>{getDataById(data2).name}</Typography>
           <Typography variant='caption' sx={{ color: "white"}}>{getDataById(data2).artist}</Typography>
           </Box>
           <Stack spacing={1} sx={{ alignItems: "center", justifyContent: "space-evenly", paddingTop: 3 }} direction={"row"}>
@@ -193,7 +193,7 @@ useEffect(() => {
             <Typography variant='caption' sx={{ color: "white" }}>-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
           </Box>
         
-        <Box justifyContent={"space-evenly"} display={"flex"}  paddingTop={5}>
+        <Box ref={targetRef} justifyContent={"space-evenly"} display={"flex"}  paddingTop={5} gap={2}>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }} onClick={scroll3} >Up Next</Card>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Lyrics</Card>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Related</Card>
@@ -201,15 +201,14 @@ useEffect(() => {
       </Box>
       </Box>
       <Box >
-      <Box ref={targetRef} className="playerbtn3" onClick={scroll4} sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100%", display:"grid",
-         backgroundColor:"#585858",minWidth:"25em", maxHeight:"120vh",overflow:"scroll",
+      <Box className="playerbtn3" onClick={scroll4} sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100vw", display:"grid",
+         backgroundColor:"#585858",minWidth:"20em", maxHeight:"120vh",overflow:"scroll",
          overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},
          "&::-webkit-scrollbar-thumb":{background:"transparent",},
          "&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
         <Box sx={{ minWidth:"26em", paddingX:1 ,paddingY:1,
          
-        }} >
-          <Typography  onClick={scroll4} paddingLeft={2}>Back to top</Typography>
+        }} onClick={scroll4}>
         {arrayDataItems3}
         </Box>
       </Box>

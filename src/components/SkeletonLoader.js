@@ -4,7 +4,7 @@ import { Stack,Box } from '@mui/material';
 
 const SkeletonLoader = () => {
   return (
-    <Box className="skeleton-body">
+    <Box className="skeleton-body" height={"74vh"} overflow={"hidden"}>
     <Stack>
     <Stack direction={"row"}>
     <div className="loading-card">

@@ -143,7 +143,7 @@ const App = () => {
             </Stack>
 
           </Box>
-          <Stack direction={"row"} sx={{ height: "100vh", width: "100%", backgroundColor: "black", padding: 2, color: "white", }}>
+          <Stack direction={"row"} sx={{ height: "100vh", width: "100%", backgroundColor: "black", color: "white", }}>
             <Box className="sidebar" sx={{ color: "#fff" }}>
               <Sidebar />
 
