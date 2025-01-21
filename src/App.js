@@ -13,7 +13,6 @@ import Profile from "./components/profile";
 import Loading from './components/Loading';
 import SkeletonLoader from './components/SkeletonLoader';
 import "./App.css";
-import SmallPlayer from './components/SmallPlayer';
 
 const General = lazy(() => import('./components/General'));
 const Explore = lazy(() => import('./components/Explore'));
