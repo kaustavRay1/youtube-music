@@ -5,7 +5,18 @@ import React, { useState,useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
+import useSwipeDetection from './useSwipeDetection';
 export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle, }) {
+  const divRef = useRef();
+
+  useSwipeDetection(
+    divRef,
+    () => console.log('Swipe Up detected in ComponentA'),
+    () => onClick(sc),
+    null, // No action for left swipe
+    null // No action for right swipe
+  );
+
   const sc=true;
   const[timeRemaining, setTimeRemaining]= useState(0);
   const targetRef = useRef();
@@ -59,6 +70,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
   if (isDisabled) {
     return null;
   }
+
   return (
     <>
     <audio ref={myRef} src={getDataById(data1).music} autoPlay={true}  onCanPlay={e =>{setIsPlaying(true);}} onEnded={playNext} loop={isRepeat}/>
@@ -112,7 +124,7 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
           <CaretUp size={24} onClick={(e) =>{onClick(sc);}} />
       </Box> 
       </Box>
-      <Box className="playerbtn2" >
+      <Box className="playerbtn2" ref={divRef} >
         <Box className="playerbtn1">
         <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}>
           <img src={getDataById(data1).img} alt='' height={"40"} width={"40"}></img>

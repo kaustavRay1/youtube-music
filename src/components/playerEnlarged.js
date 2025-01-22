@@ -10,13 +10,33 @@ import { Link } from "react-router-dom";
 import { getDataById } from "./storedata";
 import "./playerEnlarged.css";
 import data1 from './storedata1';
+import useSwipeDetection from './useSwipeDetection';
   
 const PlayerEnlarged = ({ data2, incrementId, 
   decrementId, start, formatDuration, pauseAudio, handleSliderChange, 
   isPlaying, onClick, myRef, onChange, repeat, 
   isRepeat, setIsRepeat, onClick1,shuffleBtn, setShuffle, shuffle }) => {
+      const divRef = useRef();
+      const divRef1 = useRef();
+    useSwipeDetection(
+      divRef,
+      () => onClick(sc1),
+      () => console.log("swipe down"),
+      null, // No action for left swipe
+      null // No action for right swipe
+    );
+    useSwipeDetection(
+      divRef1,
+      () => {scroll4(sc4)},
+      () => console.log("swipe down"),
+      null, // No action for left swipe
+      null // No action for right swipe
+    );
+  
+  
   const [id, setId] = useState(1);
   const sc1 = true;
+  const sc4 = true;
   const [clicked, setClicked]=useState(false);
   const [play1, setPlay1] = useState(1);
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -31,7 +51,7 @@ const PlayerEnlarged = ({ data2, incrementId,
     }
 
   }
-  const scroll4 = (sc4) => {
+ function scroll4 (sc4) {
     if (sc4) {
       setScrl(targetRef1.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }));
       console.log("clicked");
@@ -97,7 +117,7 @@ useEffect(() => {
   return (
     <>
 
-      <Box className="playerbtn4"  sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
+      <Box className="playerbtn4" sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
         <Box sx={{justifyContent:"space-evenly", alignItems:"center", display:"flex", paddingTop:4, paddingX:2}}>
 
        
@@ -155,7 +175,7 @@ useEffect(() => {
       </Box>
 
       <Box  ref={targetRef1} className= "playerbtn3" sx={{ height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", display: "grid", backgroundColor:" rgba(87, 103, 106, 0.48)"}}>
-        <Box gap={2} sx={{ alignItems: "center", justifyContent: "center", width: "100%", }}>
+        <Box ref={divRef} gap={2} sx={{ alignItems: "center", justifyContent: "center", width: "100%", }}>
         <Box paddingY={2}> <CaretDown size={26} onClick={(e) => { onClick(sc1); }} /></Box>
           <Box sx={{ height: "20em", paddingX:2 }}>
           
@@ -201,16 +221,17 @@ useEffect(() => {
       </Box>
       </Box>
       <Box >
-      <Box className="playerbtn3" onClick={scroll4} sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100vw", display:"grid",
+      <Box className="playerbtn3"  sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100vw", display:"grid",
          backgroundColor:"#585858",minWidth:"20em", maxHeight:"120vh",overflow:"scroll",
          overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},
          "&::-webkit-scrollbar-thumb":{background:"transparent",},
          "&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
         <Box sx={{ minWidth:"26em", paddingX:1 ,paddingY:1,
          
-        }} onClick={scroll4}>
-          <Typography p={1}>Back to top</Typography>
+        }} ref={divRef1}>
+          <Box>
         {arrayDataItems3}
+        </Box>
         </Box>
       </Box>
       </Box>
