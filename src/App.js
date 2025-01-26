@@ -17,6 +17,7 @@ import "./App.css";
 const General = lazy(() => import('./components/General'));
 const Explore = lazy(() => import('./components/Explore'));
 const App = () => {
+  
  const [shuffle, setShuffle] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isRepeat, setIsRepeat] = useState(false);
@@ -24,6 +25,33 @@ const App = () => {
   const targetRef = useRef(null);
   const targetRef1 = useRef();
   const myRef = useRef();
+  const [stack, setStack] = useState([]); // State to store the stack
+  const [output, setOutput] = useState(""); // State to display output
+
+  // Function to handle card click
+  const handleCardClick = (cardId) => {
+    setStack((prevStack) => {
+      const newStack = [...prevStack, cardId];
+      setOutput(`${newStack.join(", ")}`);
+      console.log(`Stack: ${newStack}`);
+      return newStack;
+    });
+  };
+
+  // Function to handle pop action
+  const handlePop = () => {
+    setStack((prevStack) => {
+      if (prevStack.length === 0) {
+        setOutput("Stack is empty.");
+        return prevStack;
+      }
+      const poppedCard = prevStack[prevStack.length - 1];
+      const newStack = prevStack.slice(0, -1);
+      setOutput(`Popped: ${poppedCard} | Stack: ${newStack.join(", ")}`);
+      return newStack;
+    });
+  };
+
   const shuffleBtn = () =>{
     if(shuffle){
       setShuffle(false);
@@ -152,9 +180,9 @@ const App = () => {
               <Box sx={{ width: "100%", minHeight: "20vh", color: "#fff", }}>
                 <Suspense fallback={<div><SkeletonLoader /></div>}>
                   <Switch>
-                    <Route path="/home" ><General onClick={playing} /></Route>
-                    <Route path="/explore"><Explore onClick={playing} /></Route>
-                    <Route path="/library"><Library /></Route>
+                    <Route path="/home" ><General stack={stack} onClick={playing} handleCardClick={handleCardClick} /></Route>
+                    <Route path="/explore"><Explore onClick={playing} handleCardClick={handleCardClick} /></Route>
+                    <Route path="/library"><Library stack={stack} onClick={playing} handleCardClick={handleCardClick}/></Route>
                     <Route path="/login" ><Login /></Route>
                     <Route path="/register"><SignUp /></Route>
                     <Route path="/profile"><Profile /></Route>
@@ -166,7 +194,7 @@ const App = () => {
               onChange={handleChange} myRef={myRef} formatDuration={formatDuration} start={start} 
               pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} isPlaying={isPlaying} 
               setIsPlaying={setIsPlaying} onClick={scroll} repeat={repeat} isRepeat={isRepeat} 
-              setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle}/>
+              setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle} handleCardClick={handleCardClick}/>
               </Box>
 
             </Box>
@@ -177,7 +205,7 @@ const App = () => {
           incrementId={incrementId} decrementId={decrementId} onChange={handleChange} myRef={myRef}
            formatDuration={formatDuration} start={start} pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} 
            isPlaying={isPlaying} setIsPlaying={setIsPlaying} onClick={scroll1} repeat={repeat} 
-           isRepeat={isRepeat} setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle}/> </Box>
+           isRepeat={isRepeat} setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle} /> </Box>
         </Box>
       </Box>
     </BrowserRouter>

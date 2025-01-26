@@ -3,10 +3,8 @@ import { Play, SkipBack, Pause, SkipForward, ThumbsUp, ThumbsDown,
    DotsThreeOutlineVertical, SpeakerHigh, Repeat, Shuffle, CaretUp, 
    Screencast, RepeatOnce, 
    CaretDown} from 'phosphor-react'
-import BottomBar from './BottomBar';
 import React, { useState, useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider';
-import { Link } from "react-router-dom";
 import { getDataById } from "./storedata";
 import "./playerEnlarged.css";
 import data1 from './storedata1';
@@ -23,14 +21,14 @@ const PlayerEnlarged = ({ data2, incrementId,
       () => onClick(sc1),
       () => console.log("swipe down"),
       null, // No action for left swipe
-      null // No action for right swipe
+      null, // No action for right swipe
     );
     useSwipeDetection(
       divRef1,
       () => {scroll4(sc4)},
       () => console.log("swipe down"),
       null, // No action for left swipe
-      null // No action for right swipe
+      null, // No action for right swipe
     );
   
   
@@ -222,14 +220,14 @@ useEffect(() => {
       </Box>
       <Box >
       <Box className="playerbtn3"  sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100vw", display:"grid",
-         backgroundColor:"#585858",minWidth:"20em", maxHeight:"120vh",overflow:"scroll",
-         overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},
+         backgroundColor:"#585858",minWidth:"20em", maxHeight:"120vh",overflowY:"scroll",
+        "&::-webkit-scrollbar":{width:4,height:9},
          "&::-webkit-scrollbar-thumb":{background:"transparent",},
          "&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
         <Box sx={{ minWidth:"26em", paddingX:1 ,paddingY:1,
          
-        }} ref={divRef1}>
-          <Box>
+        }}  ref={divRef1}>
+          <Box  >
         {arrayDataItems3}
         </Box>
         </Box>

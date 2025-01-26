@@ -6,7 +6,7 @@ import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
 import useSwipeDetection from './useSwipeDetection';
-export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle, }) {
+export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle,handleCardClick }) {
   const divRef = useRef();
 
   useSwipeDetection(
@@ -34,9 +34,11 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
     if(shuffle){
       console.log(x);
       setPlay1(x);
+      handleCardClick(x);
     }
   setPlay1(play1 + 1);
   onChange(play1);
+  handleCardClick(play1);
   };
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume]=useState(30);

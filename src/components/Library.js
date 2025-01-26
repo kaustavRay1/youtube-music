@@ -1,7 +1,22 @@
-import React from 'react'
-import {Box,Stack,Card,Typography,IconButton,Button,Link} from "@mui/material"
+import React, {useState} from 'react'
+import { Stack, Box, Typography, Card, IconButton, Avatar, CardActionArea, CardContent, Link,Stack as MuiStack, Button } from '@mui/material';
 import {Play} from "phosphor-react"
-const Library = () => {
+import data1 from './storedata1'
+const Library = ({stack, handleCardClick, onClick}) => {
+  const [clicked, setClicked]=useState(false);
+
+  const stackData = stack.map((id) => data1.find((item) => item.id === id)) .reverse();;
+
+  const arrayDataItems2 = stackData.slice(0, 10).map(data1 => 
+    <Card key={data1.id} sx={{ height: "18em", width: "16em",backgroundColor:"black",  }}>
+    <CardActionArea>
+      <CardContent>
+      <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
+      <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id); }}><Play size={20} /></IconButton></Stack>
+      </CardContent>
+    </CardActionArea>
+  </Card>
+  )
   return (
     <Stack spacing={2} sx={{maxHeight:"74vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4, },paddingLeft:"1%"}}>
        <Box p={2}>
@@ -13,14 +28,7 @@ const Library = () => {
       </Stack>
       </Box>
       <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-        <Box display={"flex"} sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q13.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >Bad Boy (feat. Luana Kiara)</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>     
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "14em", width: "14em",borderRadius:"100%", }}><img src='pro.jpg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Martin Garrix</Typography></Stack></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q14.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Faded <br/> Alan Walker</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box><Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q15.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Unstoppable <br/> Sia</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q16.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Something Just Like This <br/> Coldplay</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q17.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Fearless Pt. II <br/>Lost Sky & Chris Linton</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        </Box>
+      {arrayDataItems2}
       </Stack>
        <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
        <Box display={"flex"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>

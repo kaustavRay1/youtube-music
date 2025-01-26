@@ -8,7 +8,7 @@ import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import data1 from './storedata1';
-const General = ({onClick}) => {
+const General = ({onClick, handleCardClick, stack}) => {
   
 
   const [id, setId] = useState(1);
@@ -54,12 +54,24 @@ const General = ({onClick}) => {
   useEffect(() => {
     fetchUserData();
   }, []);
+  const stackData = stack.map((id) => data1.find((item) => item.id === id)) .reverse();;
+
+  const arrayDataItemsLogin = stackData.slice(0, 10).map(data1 => 
+    <Card key={data1.id} sx={{ height: "18em", width: "16em",backgroundColor:"black",  }}>
+    <CardActionArea>
+      <CardContent>
+      <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
+      <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id); }}><Play size={20} /></IconButton></Stack>
+      </CardContent>
+    </CardActionArea>
+  </Card>
+  )
   const arrayDataItems2 = data1.slice(0, 10).map(data1 => 
       <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black",  }}>
       <CardActionArea>
         <CardContent>
         <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
-        <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true);  }}><Play size={20} /></IconButton></Stack>
+        <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id); }}><Play size={20} /></IconButton></Stack>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -68,7 +80,7 @@ const General = ({onClick}) => {
       <Card key={data1.id} sx={{backgroundColor:"black"}}>
       <CardActionArea>
         <CardContent>
-        <Box onClick={e => { onClick(data1.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data1.img} height={"100%"} width={"100%"} alt={data1.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data1.title}</Typography><Typography fontSize={14}>{data1.artist}</Typography></Stack></Stack></Box>
+        <Box onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data1.img} height={"100%"} width={"100%"} alt={data1.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data1.title}</Typography><Typography fontSize={14}>{data1.artist}</Typography></Stack></Stack></Box>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -77,7 +89,7 @@ const General = ({onClick}) => {
       <Card key={data2.id} sx={{backgroundColor:"black"}}>
       <CardActionArea>
         <CardContent>
-        <Box onClick={e => { onClick(data2.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
+        <Box onClick={e => { onClick(data2.id); setClicked(true); handleCardClick(data2.id); }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -86,7 +98,7 @@ const General = ({onClick}) => {
       <Card key={data2.id} sx={{backgroundColor:"black"}}>
       <CardActionArea>
         <CardContent>
-        <Box onClick={e => { onClick(data2.id); setClicked(true);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
+        <Box onClick={e => { onClick(data2.id); setClicked(true); handleCardClick(data2.id); }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -137,13 +149,19 @@ const General = ({onClick}) => {
     <Box gap={1} className="general" sx={{height:"74vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4, },paddingLeft:"1%"}}>
       <Box p={1}><Category/></Box>
       {authUser ? (
-     <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography>
-    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>):( <Stack direction={"row"} alignItems={"center"} spacing={1}>
+    <Box> <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography> 
+    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>
+    <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={1}>
+ {arrayDataItemsLogin}
+ </Box>
+     </Box>):( <Box><Stack direction={"row"} alignItems={"center"} spacing={1}>
       <Typography fontSize={28} fontFamily={"sans-serif"} >Top Trending </Typography><Fire size={25} weight="bold"/></Stack>
-      )}
       <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={1}>
  {arrayDataItems2}
  </Box>
+      </Box>
+      )}
+      
       <Stack p={2} spacing={1}>
       <Typography variant='p' fontSize={"14"}  fontFamily={"sans-serif"}>START RADIO BASED ON A SONG </Typography>
       <Typography variant="h3"  fontFamily={"sans-serif"}>Quick picks</Typography>
