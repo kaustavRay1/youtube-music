@@ -5,10 +5,10 @@ import data1 from './storedata1'
 const Library = ({stack, handleCardClick, onClick}) => {
   const [clicked, setClicked]=useState(false);
 
-  const stackData = stack.map((id) => data1.find((item) => item.id === id)) .reverse();;
+  const stackData = stack.map((id) => data1.find((item) => item.id === id)).reverse() ;
 
   const arrayDataItems2 = stackData.slice(0, 10).map(data1 => 
-    <Card key={data1.id} sx={{ height: "18em", width: "16em",backgroundColor:"black",  }}>
+    <Card key={data1.id} sx={{ height:"18em",minWidth: "16em", maxWidth:"16em",backgroundColor:"black",  }}>
     <CardActionArea>
       <CardContent>
       <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
@@ -27,9 +27,17 @@ const Library = ({stack, handleCardClick, onClick}) => {
       <Link to="/Relax"><Button sx={{color:"white",borderRadius:"4",backgroundColor:"rgba(255, 92, 0, .7)"}} variant='outlined'><Typography fontSize={14} fontFamily={"sans-serif"}>Podcasts</Typography></Button></Link>
       </Stack>
       </Box>
-      <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-      {arrayDataItems2}
-      </Stack>
+        {stackData.length > 0 ?
+        (
+          <Box display={"flex"}  overflowX={"scroll"} >
+              {arrayDataItems2}
+          </Box>
+
+        ):(
+        <Typography>Nothing here! Try playing something</Typography>
+        )
+        
+        }
        <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
        <Box display={"flex"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 8.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Rihanna</Typography></Stack></Box>

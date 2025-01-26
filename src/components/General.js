@@ -57,7 +57,7 @@ const General = ({onClick, handleCardClick, stack}) => {
   const stackData = stack.map((id) => data1.find((item) => item.id === id)) .reverse();;
 
   const arrayDataItemsLogin = stackData.slice(0, 10).map(data1 => 
-    <Card key={data1.id} sx={{ height: "18em", width: "16em",backgroundColor:"black",  }}>
+    <Card key={data1.id} sx={{ height:"18em",minWidth: "16em", maxWidth:"16em",backgroundColor:"black",  }}>
     <CardActionArea>
       <CardContent>
       <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
