@@ -13,6 +13,8 @@ import Profile from "./components/profile";
 import Loading from './components/Loading';
 import SkeletonLoader from './components/SkeletonLoader';
 import "./App.css";
+import data1 from './components/storedata1';
+import { NextWeek } from '@mui/icons-material';
 
 const General = lazy(() => import('./components/General'));
 const Explore = lazy(() => import('./components/Explore'));
@@ -25,8 +27,11 @@ const App = () => {
   const targetRef = useRef(null);
   const targetRef1 = useRef();
   const myRef = useRef();
-  const [stack, setStack] = useState([]); // State to store the stack
+  const [stack, setStack] = useState([]); 
+  const [pointer, setPointer] = useState(stack.length - 1); // State to store the stack
+  const [lastVisitedId, setLastVisitedId] = useState(null);
   const [output, setOutput] = useState(""); // State to display output
+  const currentItem = stack.length > 0 ? data1.find((item) => item.id === stack[pointer]) : null;
 
   // Function to handle card click
   const handleCardClick = (cardId) => {
@@ -117,28 +122,25 @@ const App = () => {
 
   const [count, setCount] = useState(0);
   const [clicked, setClicked] = useState(false);
-  const handleChange = (play1) => {
-    setDataToPass(dataToPass + play1);
-  };
-  const incrementId = () => {
-    setDataToPass(prevId => prevId + 1);
-    setCount(count + 1);
-  };
-  const decrementId = () => {
-    if (clicked == true) {
-      setCount(0);
-      setClicked(false);
-    }
-    else if (count > 0 && dataToPass > count) {
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId - 1);
-    }
-    else if (count == dataToPass && count > 0) {
-      setCount(count => count - 1);
-      setDataToPass(prevId => prevId - 1);
-    }
-  };
 
+    const navigate = (direction) => {
+      if (stack.length === 0) return; // Prevent navigation if stack is empty
+      let newPointer = pointer;
+    
+      if (direction === "next" && pointer < stack.length - 1) {
+        newPointer += 1;
+      } else if (direction === "prev" && pointer > 0) {
+        newPointer -= 1;
+      } else if (direction === "next" && pointer === stack.length - 1) {
+       var x;
+        handleCardClick(x=stack[newPointer]+ 1);
+      }
+    
+      setPointer(newPointer);
+      setDataToPass(stack[newPointer]); // Update the data being displayed
+    };
+    
+    //setDataToPass(stack[pointer]);
   const [isLoading, setIsLoading] = useState(true);
   const [dataToPass, setDataToPass] = useState(0);
   useEffect(() => {
@@ -146,7 +148,8 @@ const App = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-  }, []);
+    setPointer(stack.length - 1);
+  }, [stack]);
 
   if (isLoading) {
     return <Loading />;
@@ -190,8 +193,8 @@ const App = () => {
                   </Switch>
                 </Suspense>
               </Box>
-              <Box ><Player data1={dataToPass} incrementId={incrementId} decrementId={decrementId} 
-              onChange={handleChange} myRef={myRef} formatDuration={formatDuration} start={start} 
+              <Box ><Player data1={dataToPass} navigate={navigate} pointer={pointer} stack={stack}
+              myRef={myRef} formatDuration={formatDuration} start={start} setDataToPass ={setDataToPass}
               pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} isPlaying={isPlaying} 
               setIsPlaying={setIsPlaying} onClick={scroll} repeat={repeat} isRepeat={isRepeat} 
               setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle} handleCardClick={handleCardClick}/>
@@ -202,7 +205,7 @@ const App = () => {
         </Stack>
         <Box ref={targetRef} sx={{ height: "100vh", alignItems: "center", justifyContent: "center", width: "100%", }}>
           <Box> <PlayerEnlarged data2={dataToPass} onClick1={playing} 
-          incrementId={incrementId} decrementId={decrementId} onChange={handleChange} myRef={myRef}
+          navigate={navigate} pointer={pointer} stack={stack} myRef={myRef}
            formatDuration={formatDuration} start={start} pauseAudio={pauseAudio} handleSliderChange={handleSliderChange} 
            isPlaying={isPlaying} setIsPlaying={setIsPlaying} onClick={scroll1} repeat={repeat} 
            isRepeat={isRepeat} setIsRepeat={setIsRepeat} shuffleBtn={shuffleBtn} shuffle={shuffle} setShuffle={setShuffle} /> </Box>

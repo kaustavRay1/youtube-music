@@ -9,6 +9,7 @@ import { getDataById } from "./storedata";
 import "./playerEnlarged.css";
 import data1 from './storedata1';
 import useSwipeDetection from './useSwipeDetection';
+import LyricsDisplay from './LyricsDisplay';
   
 const PlayerEnlarged = ({ data2, incrementId, 
   decrementId, start, formatDuration, pauseAudio, handleSliderChange, 
@@ -16,6 +17,7 @@ const PlayerEnlarged = ({ data2, incrementId,
   isRepeat, setIsRepeat, onClick1,shuffleBtn, setShuffle, shuffle }) => {
       const divRef = useRef();
       const divRef1 = useRef();
+      const divRef2 = useRef();
     useSwipeDetection(
       divRef,
       () => onClick(sc1),
@@ -25,16 +27,21 @@ const PlayerEnlarged = ({ data2, incrementId,
     );
     useSwipeDetection(
       divRef1,
-      () => {scroll4(sc4)},
+      () => {
+        if (divRef1.current.scrollTop === 0) { 
+          scroll4(sc4);  // Only trigger swipe-up if the box is scrolled to the top
+        }},
       () => console.log("swipe down"),
-      null, // No action for left swipe
-      null, // No action for right swipe
+      () =>{scroll5(sc5)}, // No action for left swipe
+      () =>{scroll3(sc3)}, // No action for right swipe
     );
   
-  
+    const [showLyrics, setShowLyrics] = useState(false);
   const [id, setId] = useState(1);
   const sc1 = true;
   const sc4 = true;
+  const sc5=true;
+  const sc3=true;
   const [clicked, setClicked]=useState(false);
   const [play1, setPlay1] = useState(1);
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -42,6 +49,10 @@ const PlayerEnlarged = ({ data2, incrementId,
   const [scrl, setScrl] = useState(null);
   const targetRef = useRef(null);
   const targetRef1 = useRef(null);
+  const targetRef2 = useRef(null);
+  const handleClick = () => {
+    setShowLyrics(true);
+  };
   const scroll3 = (sc3) => {
     if (sc3) {
       setScrl(targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }));
@@ -49,8 +60,16 @@ const PlayerEnlarged = ({ data2, incrementId,
     }
 
   }
+  function scroll5 (sc5)  {
+    if (sc5) {
+      setScrl(targetRef2.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' }));
+      console.log("clicked");
+    }
+
+  }
  function scroll4 (sc4) {
     if (sc4) {
+      
       setScrl(targetRef1.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }));
       console.log("clicked");
     }
@@ -211,26 +230,30 @@ useEffect(() => {
             <Typography variant='caption' sx={{ color: "white" }}>-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
           </Box>
         
-        <Box ref={targetRef} justifyContent={"space-evenly"} display={"flex"}  paddingTop={5} gap={2}>
+        <Box justifyContent={"space-evenly"} display={"flex"}  paddingTop={5} gap={2}>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }} onClick={scroll3} >Up Next</Card>
-          <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Lyrics</Card>
+          <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }} onClick={scroll5}>Lyrics
+        
+          </Card>
           <Card sx={{ height: "2em", width: "6em", alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "black", color: "white" }}>Related</Card>
         </Box>
       </Box>
       </Box>
-      <Box >
-      <Box className="playerbtn3"  sx={{ alignItems: "center", justifyContent: "center", minHeight:"100vh", width: "100vw", display:"grid",
-         backgroundColor:"#585858",minWidth:"20em", maxHeight:"120vh",overflowY:"scroll",
+      <Box className="playerbtn3"  sx={{ alignItems: "center", justifyContent: "center", minHeight:"70vh", width: "100vw", display:"grid",
+         backgroundColor:"#585858",minWidth:"20em", maxHeight:"82vh",overflowY:"scroll",
         "&::-webkit-scrollbar":{width:4,height:9},
          "&::-webkit-scrollbar-thumb":{background:"transparent",},
-         "&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
-        <Box sx={{ minWidth:"26em", paddingX:1 ,paddingY:1,
+         "&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}   ref={divRef1}>
+        <Box display="flex" overflow={"hidden"} >
+        <Box sx={{ minWidth:"100vw", paddingX:1 ,paddingY:1,
          
-        }}  ref={divRef1}>
-          <Box  >
+        }}  ref={targetRef} >
         {arrayDataItems3}
         </Box>
+        <Box sx={{maxHeight:"70vh", minWidth:"100vw"}}  ref={targetRef2}>
+        <Box paddingTop={"5em"}><LyricsDisplay myRef={myRef} isPlaying={true} /></Box>
         </Box>
+        
       </Box>
       </Box>
     </>

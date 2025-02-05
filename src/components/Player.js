@@ -6,7 +6,7 @@ import Slider from '@mui/material/Slider';
 import { getDataById } from "./storedata";
 import "./Player.css"
 import useSwipeDetection from './useSwipeDetection';
-export default function Player({ data1, incrementId, decrementId, onChange, myRef, start, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle,handleCardClick }) {
+export default function Player({ data1, incrementId, decrementId, onChange, myRef, start,setDataToPass, formatDuration, pauseAudio, handleSliderChange, isPlaying, setIsPlaying, onClick,repeat,isRepeat, setIsRepeat,shuffleBtn, shuffle,setShuffle,handleCardClick, pointer, navigate, stack }) {
   const divRef = useRef();
 
   useSwipeDetection(
@@ -33,12 +33,14 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
     
     if(shuffle){
       console.log(x);
-      setPlay1(x);
       handleCardClick(x);
+      setDataToPass(x)
     }
-  setPlay1(play1 + 1);
-  onChange(play1);
-  handleCardClick(play1);
+    else {
+      setPlay1(play1 + 1);
+      handleCardClick(play1);
+    }
+ 
   };
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume]=useState(30);
@@ -85,9 +87,9 @@ export default function Player({ data1, incrementId, decrementId, onChange, myRe
 <Box className="playerbtn">
     <Box display={"flex"} gap={2} sx={{alignContent:"center",justifyContent:"center"}}  >
     <Stack spacing={1} sx={{  alignItems: "center" }} direction={"row"}>
-          <IconButton sx={{ color: "white" }} onClick={decrementId} ><SkipBack weight='fill' size={24} /></IconButton>
+          <IconButton sx={{ color: "white" }} onClick={() => navigate("prev")} ><SkipBack weight='fill' size={24}/></IconButton>
          {isPlaying? (<IconButton sx={{ color: "white" }} onClick={pauseAudio}> <Pause size={30} weight="fill" /></IconButton>):(<IconButton sx={{ color: "white" }} onClick={start}> <Play size={30} weight="fill" /></IconButton>)} 
-          <IconButton sx={{ color: "white" }} onClick={incrementId} ><SkipForward size={24} weight="fill" /></IconButton>
+          <IconButton sx={{ color: "white" }} onClick={() => navigate("next")} ><SkipForward size={24} weight="fill" /></IconButton>
           <Typography variant='caption' sx={{ color: "white" }}>{formatDuration(`${position}`)}/-{formatDuration(`${timeRemaining}` - `${position}`)}</Typography>
         </Stack>
       </Box>
