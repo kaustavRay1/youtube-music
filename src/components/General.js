@@ -1,260 +1,229 @@
 import { Stack, Box, Typography, Card, IconButton, Avatar, CardActionArea, CardContent } from '@mui/material';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Fire, Play } from 'phosphor-react';
 import { Category } from './Category';
-import { Pause } from '@mui/icons-material';
-import { getDataById } from "./storedata";
-import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from "./firebase";
 import data1 from './storedata1';
-const General = ({onClick, handleCardClick, stack}) => {
-  
 
-  const [id, setId] = useState(1);
-  const [play2, setPlay2]=useState(0);
-  const [clicked, setClicked]=useState(false);
+const General = ({ onClick, handleCardClick, stack }) => {
   const [authUser, setAuthUser] = useState(null);
-    
+
+  // Authentication and Firestore user profile data listener
   useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setAuthUser(user);
+        try {
+          const docRef = doc(db, "Users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setAuthUser(docSnap.data());
+          } else {
+            setAuthUser(user);
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          setAuthUser(user);
+        }
       } else {
         setAuthUser(null);
       }
     });
 
-    return () => {
-      listen();
-    };
+    return () => unsubscribe();
   }, []);
-  const fetchUserData = async () => {
-    
-     auth.onAuthStateChanged(async (user) => {
-      if(user)
-      {
-      console.log(user);
 
-      const docRef = doc(db, "Users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setAuthUser(docSnap.data());
-        console.log(docSnap.data());
-      } else {
-        console.log("User is not logged in");
-      }
-    }
-    else{
-      console.log("User not logged in.");
-    }
-    });
+  const stackData = stack.map((id) => data1.find((item) => item.id === id)).reverse();
 
+  const renderCard = (item) => (
+    <Card key={item.id} sx={{ height: "18em", minWidth: "16em", maxWidth: "16em", backgroundColor: "black" }}>
+      <CardActionArea>
+        <CardContent>
+          <img src={item.img} alt={item.title || 'Song cover'} height="100%" width="100%" />
+          <Stack direction="row" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center", color: "white" }}>
+            <Typography>{item.title}</Typography>
+            <IconButton 
+              sx={{ color: "white" }} 
+              onClick={() => { onClick(item.id); handleCardClick(item.id); }}
+            >
+              <Play size={20} />
+            </IconButton>
+          </Stack>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+
+  const renderQuickPickItem = (item) => (
+    <Card key={item.id} sx={{ backgroundColor: "black" }}>
+      <CardActionArea>
+        <CardContent>
+          <Box onClick={() => { onClick(item.id); handleCardClick(item.id); }}>
+            <Stack direction="row" spacing={2}>
+              <Card sx={{ height: "4em", width: "4em", backgroundColor: "grey" }}>
+                <img src={item.img} height="100%" width="100%" alt={item.title} />
+              </Card>
+              <Stack direction="column" sx={{ justifyContent: "center", color: "white" }}>
+                <Typography fontSize={16}>{item.title}</Typography>
+                <Typography fontSize={14}>{item.artist}</Typography>
+              </Stack>
+            </Stack>
+          </Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+
+  const arrayDataItemsLogin = stackData.slice(0, 10).map(renderCard);
+  const arrayDataItems2 = data1.slice(0, 10).map(renderCard);
+  const arrayDataItems3 = data1.slice(10, 14).map(renderQuickPickItem);
+  const arrayDataItems4 = data1.slice(14, 18).map(renderQuickPickItem);
+  const arrayDataItems5 = data1.slice(4, 8).map(renderQuickPickItem);
+
+  const scrollContainerStyle = {
+    overflow: "auto",
+    overflowY: "hidden",
+    "&::-webkit-scrollbar": { width: 4, height: 9 },
+    "&::-webkit-scrollbar-thumb": { background: "black", borderRadius: 4 },
+    "&::-webkit-scrollbar-thumb:hover": { background: "red", borderRadius: 4 }
   };
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-  const stackData = stack.map((id) => data1.find((item) => item.id === id )) .reverse();;
 
-  const arrayDataItemsLogin = stackData.slice(0, 10).map(data1 => 
-    <Card key={data1.id} sx={{ height:"18em",minWidth: "16em", maxWidth:"16em",backgroundColor:"black",  }}>
-    <CardActionArea>
-      <CardContent>
-      <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
-      <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id); }}><Play size={20} /></IconButton></Stack>
-      </CardContent>
-    </CardActionArea>
-  </Card>
-  )
-  const arrayDataItems2 = data1.slice(0, 10).map(data1 => 
-      <Card key={data1.id} sx={{ minHeight: "18em", minWidth: "16em",backgroundColor:"black",  }}>
-      <CardActionArea>
-        <CardContent>
-        <img src={data1.img} alt='Carry you' height={"100%"} width={"100%"} />
-        <Stack direction={"row"} sx={{width:"100%",justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>{data1.title}</Typography><IconButton sx={{color:"white"}} onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id); }}><Play size={20} /></IconButton></Stack>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    )
-    const arrayDataItems3 = data1.slice(10, 14).map(data1 => 
-      <Card key={data1.id} sx={{backgroundColor:"black"}}>
-      <CardActionArea>
-        <CardContent>
-        <Box onClick={e => { onClick(data1.id); setClicked(true); handleCardClick(data1.id);  }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data1.img} height={"100%"} width={"100%"} alt={data1.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data1.title}</Typography><Typography fontSize={14}>{data1.artist}</Typography></Stack></Stack></Box>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    )
-    const arrayDataItems4 = data1.slice(14, 18).map(data2 => 
-      <Card key={data2.id} sx={{backgroundColor:"black"}}>
-      <CardActionArea>
-        <CardContent>
-        <Box onClick={e => { onClick(data2.id); setClicked(true); handleCardClick(data2.id); }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    )
-    const arrayDataItems5 = data1.slice(4, 8).map(data2 => 
-      <Card key={data2.id} sx={{backgroundColor:"black"}}>
-      <CardActionArea>
-        <CardContent>
-        <Box onClick={e => { onClick(data2.id); setClicked(true); handleCardClick(data2.id); }}><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src={data2.img} height={"100%"} width={"100%"} alt={data2.title} /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>{data2.title}</Typography><Typography fontSize={14}>{data2.artist}</Typography></Stack></Stack></Box>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    )
-    function shuffleArray(array) {
-      var i, j, temp;
-      
-      for (i = array.length -1; i >= 0; i--) {
-          j = Math.floor(Math.random() * (i)) + 1;
-          temp = array[i];
-          array[i] =array[j];
-          array[j] = temp;
-      }
-      return array;
-  }
-  function shuffleArray1(array1) {
-    var i, j, temp;
-    
-    for (i = array1.length -1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i)) + 1;
-        temp = array1[i];
-        array1[i] =array1[j];
-        array1[j] = temp;
-    }
-    return array1;
-};
-  useEffect(() => {
-      
-      const handleOnLoad = () => {
-        console.log('Component loaded!');
-        shuffleArray(data1)
-          setId((prevIndex) =>
-              prevIndex === data1.length - 1 ? 0 : prevIndex + 1
-          );
-          shuffleArray1(data1)
-          setId((prevIndex) =>
-              prevIndex === data1.length - 1 ? 0 : prevIndex + 1
-          );
-      };
-      
-  
-      handleOnLoad(); 
-      return () => {};
-  }, []);
+  const topArtists = [
+    { name: "Martin Garrix", img: 'pro.jpg' },
+    { name: "Weeknd", img: 'profile 4.jpeg' },
+    { name: "Camila Cabello", img: 'profile 3.jpeg' },
+    { name: "Afrojack", img: 'profile 5.jpeg' },
+    { name: "Drake", img: 'profile 2.jpeg' },
+    { name: "Taylor Swift", img: 'profile 6.jpeg' },
+  ];
+
+  const danceMusic = [
+    { title: "Bad Boy (feat. Luana Kiara)", img: 'q13.jpeg' },
+    { title: "Faded \n Alan Walker", img: 'q14.jpeg' },
+    { title: "Unstoppable \n Sia", img: 'q15.jpeg' },
+    { title: "Something Just Like This \n Coldplay", img: 'q16.jpeg' },
+    { title: "Fearless Pt. II \n Lost Sky & Chris Linton", img: 'q17.jpeg' },
+    { title: "Headlights (feat. KIDDO)\nAlok & Alan Walker", img: 'q18.jpeg' },
+  ];
+
+  const newReleases = [
+    { title: "Papercuts", img: 'q19.jpg' },
+    { title: "Shadows (feat. Blythe)", img: 'q20.jpeg' },
+    { title: "IDEM", img: 'q21.jpeg' },
+    { title: "Illusion", img: 'q22.jpeg' },
+    { title: "Team Side feat. RCB", img: 'q23.jpeg' },
+    { title: "Breathe", img: 'q24.jpeg' },
+  ];
 
   return (
-   <>
-    <Box gap={1} className="general" sx={{height:"74vh",position:"relative",width:"95%",overflow:"scroll",overflowX:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4, },paddingLeft:"1%"}}>
-      <Box p={1}><Category/></Box>
-      {authUser ? (
-    <Box> <Stack direction={"row"} spacing={2}> <Avatar src={authUser.photo} alt='K' /><Stack><Typography fontFamily={"sans-serif"}> Hello {authUser.firstName} </Typography> 
-    <Typography fontSize={28} fontFamily={"sans-serif"} >Listen again</Typography></Stack></Stack>
-    <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={1}>
- {arrayDataItemsLogin}
- </Box>
-     </Box>):( <Box><Stack direction={"row"} alignItems={"center"} spacing={1}>
-      <Typography fontSize={28} fontFamily={"sans-serif"} >Top Trending </Typography><Fire size={25} weight="bold"/></Stack>
-      <Box display={"flex"} sx={{width:"100%",overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={1}>
- {arrayDataItems2}
- </Box>
-      </Box>
-      )}
-      
-      <Stack p={2} spacing={1}>
-      <Typography variant='p' fontSize={"14"}  fontFamily={"sans-serif"}>START RADIO BASED ON A SONG </Typography>
-      <Typography variant="h3"  fontFamily={"sans-serif"}>Quick picks</Typography>
-      </Stack>
-     <Box p={2}>
-     <Stack direction={"row"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
-     <Stack direction={"column"} spacing={-2} sx={{minWidth:"25em",}}>
-     {arrayDataItems3}
-      </Stack>
-      <Stack direction={"column"} spacing={-2} sx={{minWidth: "25em",}}>
-      {arrayDataItems4}
-      </Stack>
-      <Stack direction={"column"} spacing={-2} sx={{minWidth: "25em",}}>
-      {arrayDataItems5}
-      </Stack>
-      </Stack>
-      </Box>
-   <Typography fontSize={30} fontFamily={"sans-serif"}>Top Artists</Typography>
-   <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-        <Box display={"flex"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='pro.jpg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Martin Garrix</Typography></Stack></Box>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 4.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Weeknd</Typography></Stack></Box>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 3.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Camila Cabello</Typography></Stack></Box>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 5.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Afrojack</Typography></Stack></Box>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 2.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Drake</Typography></Stack></Box>
-        <Box><Stack direction={"column"} justifyContent={"center"} alignItems={"center"}><Card sx={{  height: "12em", width: "12em",borderRadius:"100%", }}><img src='profile 6.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Typography variant='h6'>Taylor Swift</Typography></Stack></Box>
-        </Box>
-      </Stack>
-      <Typography variant='h3' fontFamily={"sans-serif"} p={2}>Dance and electronic</Typography>
-     <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-        <Box display={"flex"} sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
-      <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q13.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >Bad Boy (feat. Luana Kiara)</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q14.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Faded <br/> Alan Walker</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box><Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q15.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Unstoppable <br/> Sia</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q16.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Something Just Like This <br/> Coldplay</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q17.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Fearless Pt. II <br/>Lost Sky & Chris Linton</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box>  <Card sx={{ height: "18em", width: "14em",backgroundColor:"black" }}><img src='q18.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Headlights (feat. KIDDO)<br/>Alok & Alan Walker</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        </Box>
-      </Stack>
-      <Typography fontSize={34} fontFamily={"sans-serif"}>New releases</Typography>
-     <Stack direction={"row"} spacing={2} sx={{width: "100%",}}>
-        <Box display={"flex"}  sx={{overflow:"scroll",overflowY:"hidden","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}} gap={2}>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q19.jpg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Papercuts</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q20.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography>Shadows (feat. Blythe)</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q21.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >IDEM</Typography><IconButton sx={{color:"white"}} ><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q22.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >Illusion</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q23.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >Team Side feat. RCB</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        <Box> <Card sx={{ height: "18em", width: "14em",backgroundColor:"black", }}><img src='q24.jpeg' alt='Carry you' /><Stack direction={"row"} sx={{justifyContent:"space-between",alignItems:"center",color:"white"}}><Typography  >Breathe</Typography><IconButton sx={{color:"white"}}><Play size={20} /></IconButton></Stack></Card></Box>
-        </Box>
-      </Stack>
-      <Typography fontSize={34} p={2} fontFamily={"sans-serif"}>Trending in Shorts</Typography>
-      <Box p={2}>
-     <Stack direction={"row"} sx={{overflow:"auto", overflowY:"hidden",position:"relative","&::-webkit-scrollbar":{width:4,height:9},"&::-webkit-scrollbar-thumb":{background:"black",borderRadius:4,},"&::-webkit-scrollbar-thumb:hover":{background:"red",borderRadius:4,},}}>
-     <Stack direction={"column"} spacing={2} sx={{minWidth:"25em",}}>
+    <>
+      <Box 
+        gap={1} 
+        className="general" 
+        sx={{
+          height: "74vh", 
+          minHeight: 0, // <--- Fixed flex/scroll collapse
+          position: "relative", 
+          width: "95%", 
+          overflowY: "auto", // <--- Changed from "scroll" to "auto" for proper scrolling
+          overflowX: "hidden", 
+          ...scrollContainerStyle, 
+          paddingLeft: "1%"
+        }}
+      >
+        <Box p={1}><Category /></Box>
         
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q1.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>No Lie (feat. Dua Lipa)</Typography><Typography fontSize={14}>Sean Paul • Dua Lipa</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q2.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>When We're Gone</Typography><Typography fontSize={14}>Mesto & Justin Mylo • When We're Gone</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q3.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Follow</Typography><Typography fontSize={14}>Martin Garix & Zedd • Sentio </Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q4.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Apologize</Typography><Typography fontSize={14} >One Republic • Timbaland</Typography></Stack></Stack></Box>
-    
-      </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q5.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Circles</Typography><Typography fontSize={14}>Post Malone • Hollywood's Bleeding</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q6.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>I Feel It Coming (feat. Daft Punk)</Typography><Typography fontSize={14}>Song • The Weeknd</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q7.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Breakaway</Typography><Typography fontSize={14}>Single • Martin Garrix, Mesto & WILHELM</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q8.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Nevada (feat. Cozi Zuehlsdorff)</Typography><Typography fontSize={14}>Song • Vicetone</Typography></Stack></Stack></Box>
-      </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q9.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Waiting For Love</Typography><Typography fontSize={14}>Avicii • Stories</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q10.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Hymn for the Weekend</Typography><Typography fontSize={14}>Coldplay • A Head Full of Dreams</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q11.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Stereo Hearts (feat. Adam Levine)</Typography><Typography fontSize={14}>Gym Class Heroes • The Papercut Chronicles II</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q12.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>We Are Young (feat. Janelle Monáe)</Typography><Typography fontSize={14}>Fun</Typography></Stack></Stack></Box>
-      </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q5.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Circles</Typography><Typography fontSize={14}>Post Malone • Hollywood's Bleeding</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q6.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>I Feel It Coming (feat. Daft Punk)</Typography><Typography fontSize={14}>Song • The Weeknd</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q7.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Breakaway</Typography><Typography fontSize={14}>Single • Martin Garrix, Mesto & WILHELM</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q8.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Nevada (feat. Cozi Zuehlsdorff)</Typography><Typography fontSize={14}>Song • Vicetone</Typography></Stack></Stack></Box>
-      </Stack>
-      <Stack direction={"column"} spacing={2} sx={{minWidth: "25em",}}>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q9.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Waiting For Love</Typography><Typography fontSize={14}>Avicii • Stories</Typography></Stack></Stack></Box>
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q10.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Hymn for the Weekend</Typography><Typography fontSize={14}>Coldplay • A Head Full of Dreams</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q11.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>Stereo Hearts (feat. Adam Levine)</Typography><Typography fontSize={14}>Gym Class Heroes • The Papercut Chronicles II</Typography></Stack></Stack></Box>       
-      <Box><Stack direction={"row"} spacing={2}> <Card sx={{ height: "4em", width: "4em",backgroundColor:"grey", }}><img src='q12.jpeg' height={"100%"} width={"100%"} alt='Carry you' /></Card><Stack direction={"column"} sx={{justifyContent:"center",color:"white"}}><Typography fontSize={16}>We Are Young (feat. Janelle Monáe)</Typography><Typography fontSize={14}>Fun</Typography></Stack></Stack></Box>
-      </Stack>
-      </Stack>
-      </Box>
-      
-   </Box>
-    
-    </>
-  )
-  
-}
+        {authUser ? (
+          <Box> 
+            <Stack direction="row" spacing={2} alignItems="center"> 
+              <Avatar src={authUser.photo} alt={authUser.firstName || 'User'} />
+              <Stack>
+                <Typography fontFamily="sans-serif">Hello {authUser.firstName || 'Music Lover'}</Typography> 
+                <Typography fontSize={28} fontFamily="sans-serif">Listen again</Typography>
+              </Stack>
+            </Stack>
+            <Box display="flex" sx={{ width: "100%", ...scrollContainerStyle }} gap={1}>
+              {arrayDataItemsLogin}
+            </Box>
+          </Box>
+        ) : ( 
+          <Box>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Typography fontSize={28} fontFamily="sans-serif">Top Trending</Typography>
+              <Fire size={25} weight="bold" />
+            </Stack>
+            <Box display="flex" sx={{ width: "100%", ...scrollContainerStyle }} gap={1}>
+              {arrayDataItems2}
+            </Box>
+          </Box>
+        )}
+        
+        <Stack p={2} spacing={1}>
+          <Typography variant='body2' fontSize={14} fontFamily="sans-serif">START RADIO BASED ON A SONG</Typography>
+          <Typography variant="h3" fontFamily="sans-serif">Quick picks</Typography>
+        </Stack>
 
-export default General
+        <Box p={2}>
+          <Stack direction="row" sx={scrollContainerStyle}>
+            <Stack direction="column" spacing={-2} sx={{ minWidth: "25em" }}>{arrayDataItems3}</Stack>
+            <Stack direction="column" spacing={-2} sx={{ minWidth: "25em" }}>{arrayDataItems4}</Stack>
+            <Stack direction="column" spacing={-2} sx={{ minWidth: "25em" }}>{arrayDataItems5}</Stack>
+          </Stack>
+        </Box>
+
+        <Typography fontSize={30} fontFamily="sans-serif">Top Artists</Typography>
+        <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
+          <Box display="flex" sx={{ ...scrollContainerStyle }} gap={2}>
+            {topArtists.map((artist, idx) => (
+              <Box key={idx}>
+                <Stack direction="column" justifyContent="center" alignItems="center">
+                  <Card sx={{ height: "12em", width: "12em", borderRadius: "100%" }}>
+                    <img src={artist.img} height="100%" width="100%" alt={artist.name} />
+                  </Card>
+                  <Typography variant='h6'>{artist.name}</Typography>
+                </Stack>
+              </Box>
+            ))}
+          </Box>
+        </Stack>
+
+        <Typography variant='h3' fontFamily="sans-serif" p={2}>Dance and electronic</Typography>
+        <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
+          <Box display="flex" sx={{ ...scrollContainerStyle }} gap={2}>
+            {danceMusic.map((song, idx) => (
+              <Box key={idx}> 
+                <Card sx={{ height: "18em", width: "14em", backgroundColor: "black" }}>
+                  <img src={song.img} alt={song.title} />
+                  <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", color: "white", p: 1 }}>
+                    <Typography style={{ whiteSpace: 'pre-line' }}>{song.title}</Typography>
+                    <IconButton sx={{ color: "white" }}><Play size={20} /></IconButton>
+                  </Stack>
+                </Card>
+              </Box>
+            ))}
+          </Box>
+        </Stack>
+
+        <Typography fontSize={34} fontFamily="sans-serif">New releases</Typography>
+        <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
+          <Box display="flex" sx={{ ...scrollContainerStyle }} gap={2}>
+            {newReleases.map((release, idx) => (
+              <Box key={idx}> 
+                <Card sx={{ height: "18em", width: "14em", backgroundColor: "black" }}>
+                  <img src={release.img} alt={release.title} />
+                  <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", color: "white", p: 1 }}>
+                    <Typography>{release.title}</Typography>
+                    <IconButton sx={{ color: "white" }}><Play size={20} /></IconButton>
+                  </Stack>
+                </Card>
+              </Box>
+            ))}
+          </Box>
+        </Stack>
+      </Box>
+    </>
+  );
+};
+
+export default General; 
