@@ -166,7 +166,6 @@ export default data;
 // Function to get song data by ID
 export function getDataById(id) {
   const item = data.find(item => item.id === id);
-  console.log(process.env.PUBLIC_URL);
   return item ? {
       id: item.id,
       img: item.img,
