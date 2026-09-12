@@ -161,11 +161,11 @@ const data1 = [
   },
 ];
 
-export default data;
+export default data1;
 
 // Function to get song data by ID
 export function getDataById(id) {
-  const item = data.find(item => item.id === id);
+  const item = data1.find(item => item.id === id);
   return item ? {
       id: item.id,
       // Prefix both img and music with PUBLIC_URL if they exist
@@ -178,7 +178,7 @@ export function getDataById(id) {
 }
 
 export function getData() {
-  const item = data[0];
+  const item = data1[0];
   return {
     id: item.id,
     img: item.img ? `${process.env.PUBLIC_URL}/${item.img}` : null,
